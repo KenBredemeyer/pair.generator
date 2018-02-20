@@ -1,6 +1,7 @@
 # generate pairs fun def
 pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separation_constraint = FALSE,
-	                         nc_include = NA, min_c = 10, max_c = 15, show_plots = FALSE) {
+	                         nc_include = NA, min_c = 10, max_c = 15, seed = 1) {
+  set.seed(seed)
 
 	if (type == "core_noncore") {
   # core scripts
