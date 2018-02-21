@@ -212,13 +212,18 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 				# pair to swap out is intersection of max_s.f., not max_s.f. chain, not below or equal to min_c, not_min_chain
 				#  if the max is only involved out of chain with equal or below min - then throw out the equal min, and move to the next max
 				swap_out <- Reduce(intersect, list(most_sampled, nmc, nmin, not_min_chain))
-				swap_out1 <- sample(swap_out, 1)
-				swap_out_chain <- gp[swap_out1, "chain"] # a character string
-
-				if (length(swap_out) == 0)
+				if (length(swap_out) == 0) {
 					swap_out <- Reduce(intersect, list(most_sampled, nmc, nbmin_all))
-				if(length(swap_out) != 0) break
+				}
+				if (length(swap_out) > 0) {
+					swap_out1 <- sample(swap_out, 1)
+					swap_out_chain <- gp[swap_out1, "chain"] # a character string
+				}
 			}
+      if (length(swap_out) == 0) {
+      	message("swap method stopped: could not find a pair to swap out")
+      	break
+      }
 
 			swap_chain_number <- gp[swap_out1, "chain_number"]
 			swap_chain_pairs <- gp[gp$chain_number == swap_chain_number, "combination"]
