@@ -176,6 +176,9 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 	  swap(gp = gp, s.f. = s.f., combinations = combinations, min_c = min_c, max_c = max_c)
 
 		gp[,1:2] <- switch_lr(gp[,1:2])
+		attr(gp, "user_inputs") <- list(type = type, chaining_constant = chaining_constant,
+			                              separation_constraint = separation_constraint,
+	                                   nc_include = nc_include, min_c = min_c, max_c = max_c, seed = seed)
 		return(gp)
 	}
 }
