@@ -2,6 +2,7 @@
 pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separation_constraint = FALSE,
 	                         nc_include = NA, min_c = 10, max_c = 15, seed = 1) {
   set.seed(seed)
+  stopifnot(type == "core_noncore" | type == "standard_pairs")
 
 	if (type == "core_noncore") {
 		# core scripts
@@ -15,7 +16,6 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 		if (!separation_constraint) {
 			# s1 is non-core sampling
 			s1 <- sampler(nc_scripts[ , "media"], nrow(nc_scripts) * nc_include)
-
 			# s2 for sampling of core scripts
 			s2 <- list()  # probably not the best way.
 			# nc_include must be less than the number of core scripts
@@ -23,7 +23,6 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 				s2[[i]] <- sample(scripts[,"media"], nc_include)
 
 			cnc_gp <- data.frame(non_core = I(s1), core = unlist(s2)[order(order(s1))])
-
 		}
 
 		if (is.numeric(separation_constraint)) {
@@ -46,7 +45,6 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 			paired_cores <- tapply(cnc_combinations$core_script, nonCore, function(x) sample(x, nc_include))
 			cnc_gp <- data.frame(non_core = rep(unique(as.character(nonCore)), each = nc_include), core = as.character(unname(unlist(paired_cores))))
 		}
-
 
 		## apply chaining
 		reps <- floor(nc_include / chaining_constant)
