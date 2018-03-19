@@ -1,4 +1,29 @@
-# generate pairs fun def
+#' Generate Pairs
+#'
+#' Pair performances or media items for constructing a pairwise comparison
+#' design.
+#'
+#' @param x A data.frame containing 3 variables named "media", "core", "score".
+#'   Variable types must be "character", "numeric", "numeric".
+#' @param type A character string, either \code{"core_noncore"} or
+#'   \code{"standard_pairs"}. Use \code{"standard_pairs"} to construct a new
+#'   scale, or \code{"core_noncore"} to place non-core items on an existing
+#'   scale.
+#' @param chaining_constant Integer.  Specifies the number of consecutive pairs
+#'   containg a common media item or performance.
+#' @param separation_constraint Numeric specifying the maximum range of scores
+#'   to use when pairing, or FALSE for no separation constraint.
+#' @param nc_include Use only for \code{type = "core_noncore"}.  Integer
+#'   specifying the number of times each non-core performance is included.
+#' @param min_c Integer. The minimum number of times a performance should be
+#'   included. Minimum and maximum inclusions are not guaranteed. \code{min_c}
+#'   and \code{max_c} are relevant for \code{type = "standard_pairs"} only.
+#' @param max_c Integer. The maximum number of times a performance should be
+#'   included.
+#' @return A data frame with paired performances, where "left" and "right" form
+#'   the pair. "combination" is the row number corresponding to a data frame
+#'   containing all possiblge pairs, used for checks. For importing into an
+#'   interface for judging, use only "left", "right" and "chain_number".
 pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separation_constraint = FALSE,
 	                         nc_include = NA, min_c = 10, max_c = 20, seed = 1) {
   set.seed(seed)
