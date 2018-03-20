@@ -59,7 +59,7 @@ swap <- function(gp, s.f., combinations, min_c, max_c) {
 		# pair to swap in:
 		for (i in 1:length(min_s.f.)) {
 			swap_in <- combinations[(combinations[-swap_chain_pairs, 1] == min_s.f.[i] & combinations[-swap_chain_pairs, 2] == swap_out_chain) |
-					(combinations[-swap_chain_pairs, 2] == min_s.f.[i] & combinations[-swap_chain_pairs, 1] == swap_out_chain), ][1, ]
+					(combinations[-swap_chain_pairs, 2] == min_s.f.[i] & combinations[-swap_chain_pairs, 1] == swap_out_chain), ]
 
 			if (nrow(swap_in) > 0) {
 				gp[swap_out1, 1:2] <- swap_in
