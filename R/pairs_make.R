@@ -24,6 +24,7 @@
 #'   the pair. "combination" is the row number corresponding to a data frame
 #'   containing all possiblge pairs, used for checks. For importing into an
 #'   interface for judging, use only "left", "right" and "chain_number".
+#' @export
 pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separation_constraint = FALSE,
 	                         nc_include = NA, min_c = 10, max_c = 20, seed = 1) {
   set.seed(seed)

@@ -1,4 +1,7 @@
-# barchart to see how well each script is represented.
+#' barchart to see how well each script is represented.
+#'
+#' @param x A data frame containing pairs of performances.
+#' @export
 pairs_plot_inclusions <- function(gp) {
 	sampling <- rle(sort(unlist(gp[ , 1:2])))
 	s.f. <- sampling[[1]]

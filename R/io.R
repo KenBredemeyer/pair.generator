@@ -24,6 +24,8 @@
 #'   missing media labels, if 'core' is not all 0 or 1.  An error will also be
 #'   returned if \code{separation_constraint == TRUE} and there are missing or
 #'   non-numeric scores.
+#'
+#' @export
 pairs_import.csv <- function(scores_file, separation_constraint = FALSE) {
 	input_data <- read.csv(scores_file, stringsAsFactors = FALSE)
 
@@ -49,6 +51,7 @@ pairs_import.csv <- function(scores_file, separation_constraint = FALSE) {
 #' @param file Character string naming a file for writing
 #'
 #' @seealso \code{\link{pairs_make}}
+#' @export
 pairs_export <- function(gp, file) {
 	x <- gp[ , c("left", "right", "chain_number")]
 	write.csv(x, file, row.names = FALSE)

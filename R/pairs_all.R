@@ -1,21 +1,24 @@
-# Generate all unique pairs
-# allow for multiple judges
-#
-#         Ken Bredemeyer 18/05/2017
-#
-# `scripts` is a character vector of media labels.
-# `reps` is the number of judges.
-# "chain_number" represents judge number (i.e. "chain_number" = 1 for judge 1).
-
-
 #' Generate exhaustive pairs.
 #'
-#' \code{pairs_all} generates all unique pairs for pairwise comparisons.
+#' \code{all_pairs} generates all unique pairs for pairwise comparisons.
 #'
-#' Exhaustie pairs can be created for import into Pairwise Comparisons
-#' Application using any number of judges.  Each judge will view all pairs.
+#' Exhaustive pairs (each media item paired with all others) can be created for
+#' using any number of judges.  Each judge will view all pairs. Allocate
+#' n*(n-1)/2 pairs to each judge.
 #'
 #' @param scripts Character vector of performances to compare.
+#'
+#' @param reps Integer value at least 1. Use this to make import file for
+#'   multiple judges.  Use reps value at least equal to the number of judges.
+#'
+#' @return A data frame containing columns "left", "right" and "chain_number".
+#'   "chain_number" can be read as judge number for the purposes of import into
+#'   Pairwise Comparisons Application.
+#'
+#' @examples
+#'   all_pairs(letters)
+#'
+#' @export
 pairs_all <- function(scripts, reps = 1) {
 	reps <- as.integer(reps)
 	if(reps < 1)
