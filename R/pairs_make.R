@@ -30,6 +30,9 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
   set.seed(seed)
   stopifnot(type == "core_noncore" | type == "standard_pairs")
 
+  stringsAsFactorsOption <- getOption("stringsAsFactors")
+  options(stringsAsFactors = FALSE)
+
 	if (type == "core_noncore") {
 		# core scripts
 		scripts <- x[x[,2] == 1, c("media", "score")]
@@ -112,6 +115,7 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 		# add chain number
 		cnc_gp <- cbind(cnc_gp, chain_number)
 
+		options(stringsAsFactors = stringsAsFactorsOption)
 		return(cnc_gp)
 	}
 
@@ -123,7 +127,6 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 		if (length(scripts$media) < 2) stop("must have at least 2 performances to compare")
 
 		# create all possible combinations of pairs
-		options(stringsAsFactors = FALSE)
 		combination_labels <- t(combn(scripts$media, 2))
 		combination_values <- (t(combn(scripts$score, 2)))
 		combinations <- cbind(combination_labels, as.data.frame(combination_values))
@@ -203,6 +206,8 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 		attr(gp, "user_inputs") <- list(type = type, chaining_constant = chaining_constant,
 			                              separation_constraint = separation_constraint,
 	                                   nc_include = nc_include, min_c = min_c, max_c = max_c, seed = seed)
+		options(stringsAsFactors = stringsAsFactorsOption)
 		return(gp)
 	}
+
 }
