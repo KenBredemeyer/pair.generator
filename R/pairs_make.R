@@ -134,18 +134,8 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 
 		if (is.numeric(separation_constraint)) {
 
-			# sort to ascending order (needed for diff calculation below)
-			ordered_scores <- round(sort(scripts$score), 3)
-
-			# calculate minimum possible valid separation constraint for scale continuity
-			MDL <- which(diff(ordered_scores) == max(diff(ordered_scores)))
-			min_sep <- sum(diff(ordered_scores)[(MDL-1):(MDL+1)])
-
-			# warning if separation constraint will cause scale discontinuity
-			if (separation_constraint < min_sep) {
-				warning("separation_constraint is too small and will cause discontinuity in the scale. \n
-                 Increase separation_constraint to ", min_sep, " or more")
-			}
+			# test minimum separation constraint that will *probably* not cause scale discontinuity
+			#test_min_separation(scripts$score, separation_constraint)
 
 			available_comparisons <- combinations[which(abs(combinations[,3] - combinations[,4]) < separation_constraint), ]
 
