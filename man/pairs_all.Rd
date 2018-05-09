@@ -27,4 +27,5 @@ n*(n-1)/2 pairs to each judge.
 }
 \examples{
   all_pairs(letters)
+
 }
