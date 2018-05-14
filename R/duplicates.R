@@ -6,6 +6,7 @@
 duplicates <- function(pairs) {
 	dups <- pairs[which(duplicated(pairs[,1:2]) | duplicated(pairs[,1:2], fromLast = TRUE)), ]
 	dups <- dups[order(dups[ , 1], dups[ , 2]), ]
+	dups
 }
 
 #' Find repeated pairs in reverse left/right order
@@ -26,8 +27,13 @@ reverse_duplicates <- function(gp) {
 	orig_indicies <- do.call(c, orig_i)
 	x <- data.frame(index = orig_indicies, rev_index = revdups_indicies)
 	results <- cbind(orig_indicies, gp[orig_indicies, 1:2], revdups_indicies, gp[revdups_indicies, 1:2])
-	colnames(results) <- c("row", "left", "right", "row_rev", "left_rev", "right_rev")
-	results
+	if (!is.null(orig_indicies)) {
+		colnames(results) <- c("row", "left", "right", "row_rev", "left_rev", "right_rev")
+		results
+	} else {
+		name <- deparse(substitute(gp))
+		message(paste0("no reverse duplicates found in ", name))
+	}
 }
 
 #' Frequency plot of pairs
