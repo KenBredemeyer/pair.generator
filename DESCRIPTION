@@ -1,7 +1,7 @@
 Package: pair.generator
 Type: Package
 Title: Pair performances for assessment using pairwise comparisons
-Version: 0.1.1
+Version: 0.1.2
 Author: Ken Bredemeyer
 Maintainer: Ken Bredemeyer <21833472@student.uwa.edu.au>
 Description: Pairwise comparison involves side by side comparisons of two 
@@ -11,5 +11,6 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests:
-    knitr (>= 1.19)
+    knitr (>= 1.19),
+    testthat
 VignetteBuilder: knitr
