@@ -1,4 +1,4 @@
-chain_once <- function(pairs, chain_length = 4) {
+chain_once <- function(pairs, chain_length) {
 	set.seed(1)
 	options(stringsAsFactors = FALSE)
 
@@ -6,7 +6,6 @@ chain_once <- function(pairs, chain_length = 4) {
 	pairs_copy[ , 3] <- 1:dim(pairs)[1]
 	performance <- unique(unlist(pairs_copy[,1:2]))
 	performance <- sample(performance)
-	chain_length = 4
 
 	match_i <- list()
 	chain_i <- list()
