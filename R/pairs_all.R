@@ -31,5 +31,5 @@ pairs_all <- function(scripts, reps = 1) {
 	pairs <- do.call(rbind, pairs)
 	df_out <- cbind(pairs, rep(1:reps, each = count))
 	colnames(df_out) <- c("left", "right", "chain_number")
-	df_out
+	as.data.frame(df_out)
 }
