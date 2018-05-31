@@ -22,16 +22,16 @@ swap <- function(gp, s.f., combinations, min_c, max_c) {
 			# not below_min comparisons:  (for any given above_max to swap out, must not swap out _any_ below_min
 			nbmin <- list()
 			if (length(below_min) > 0) {
-				for (i in 1:length(below_min)) {
-					nbmin[[i]] <- which(gp[,1] != below_min[i] & gp[,2] != below_min[i])
+				for (j in 1:length(below_min)) {
+					nbmin[[j]] <- which(gp[,1] != below_min[j] & gp[,2] != below_min[j])
 				}
 				nbmin_all <- Reduce(intersect, nbmin)
 			} else nbmin_all <- 1:nrow(gp)
 			# not equal_min
 			nemin <- list()
 			if (length(equal_min) > 0) {
-				for (i in 1:length(equal_min)) {
-					nemin[[i]] <- which(gp[,1] != equal_min[i] & gp[,2] != equal_min[i])
+				for (k in 1:length(equal_min)) {
+					nemin[[k]] <- which(gp[,1] != equal_min[k] & gp[,2] != equal_min[k])
 				}
 				nemin_all <- Reduce(intersect, nemin)
 			} else nemin_all <- 1:nrow(gp)
