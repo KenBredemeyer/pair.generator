@@ -57,15 +57,21 @@ swap <- function(gp, s.f., combinations, min_c, max_c) {
 		swap_chain_pairs <- gp[gp$chain_number == swap_chain_number, "combination"]
 		# do not swap in a pair that already exists in that chain (avoid repetition of pairs in-chain)
 		# pair to swap in:
-		for (i in 1:length(min_s.f.)) {
-			swap_in <- combinations[(combinations[-swap_chain_pairs, 1] == min_s.f.[i] & combinations[-swap_chain_pairs, 2] == swap_out_chain) |
-					(combinations[-swap_chain_pairs, 2] == min_s.f.[i] & combinations[-swap_chain_pairs, 1] == swap_out_chain), ]
 
-			if (nrow(swap_in) > 0) {
-				gp[swap_out1, 1:2] <- swap_in
-				gp[swap_out1, 3] <- as.numeric(rownames(swap_in))
-			}
+		swap_in <- combinations[(combinations[-swap_chain_pairs, 1] == min_s.f.[1] & combinations[-swap_chain_pairs, 2] == swap_out_chain) |
+					(combinations[-swap_chain_pairs, 2] == min_s.f.[1] & combinations[-swap_chain_pairs, 1] == swap_out_chain), ]
 
+		if (nrow(swap_in) == 0) {
+			message("pairs generated, but could not meet specified inclusions")
+			break
+		} else if (nrow(swap_in) == 1) {
+	  	gp[swap_out1, 1:2] <- swap_in
+			gp[swap_out1, 3] <- as.numeric(rownames(swap_in))
+		} else if (nrow(swap_in) > 1) {
+		  swap_in <- swap_in[1,]   #or sample a row.
+	  	gp[swap_out1, 1:2] <- swap_in
+			gp[swap_out1, 3] <- as.numeric(rownames(swap_in))
+    }
 			# update s.f., above_max, below_min, equal_min
 			sampling <- rle(sort(unlist(gp[ , 1:2])))
 			s.f. <- sampling[[1]]
@@ -74,11 +80,6 @@ swap <- function(gp, s.f., combinations, min_c, max_c) {
 			below_min <- names(s.f.[which(s.f. < min_c)])
 			equal_min <- names(s.f.[which(s.f. == min_c)])
 
-		}
-		if (nrow(swap_in) == 0) {
-			message("pairs generated, but could not meet specified inclusions")
-			break
-		}
 	}
 	gp
 }
