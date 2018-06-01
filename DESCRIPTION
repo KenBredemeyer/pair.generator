@@ -1,7 +1,7 @@
 Package: pair.generator
 Type: Package
 Title: Pair performances for assessment using pairwise comparisons
-Version: 0.1.4
+Version: 0.2.0
 Author: Ken Bredemeyer
 Maintainer: Ken Bredemeyer <21833472@student.uwa.edu.au>
 Description: Pairwise comparison involves side by side comparisons of two 
