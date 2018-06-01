@@ -190,7 +190,7 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 		}
 
 		# improve range of inclusions of performances
-	  swap(gp = gp, s.f. = s.f., combinations = combinations, min_c = min_c, max_c = max_c)
+	  gp <- swap(gp = gp, s.f. = s.f., combinations = combinations, min_c = min_c, max_c = max_c)
 
 		gp[,1:2] <- switch_lr(gp[,1:2])
 		attr(gp, "user_inputs") <- list(type = type, chaining_constant = chaining_constant,
