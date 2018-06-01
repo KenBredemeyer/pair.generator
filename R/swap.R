@@ -57,9 +57,9 @@ swap <- function(gp, s.f., combinations, min_c, max_c) {
 		swap_chain_pairs <- gp[gp$chain_number == swap_chain_number, "combination"]
 		# do not swap in a pair that already exists in that chain (avoid repetition of pairs in-chain)
 		# pair to swap in:
-
-		swap_in <- combinations[(combinations[-swap_chain_pairs, 1] == min_s.f.[1] & combinations[-swap_chain_pairs, 2] == swap_out_chain) |
-					(combinations[-swap_chain_pairs, 2] == min_s.f.[1] & combinations[-swap_chain_pairs, 1] == swap_out_chain), ]
+    combinations_new <- combinations[-swap_chain_pairs, ]
+		swap_in <- combinations_new[(combinations_new[ , 1] == min_s.f.[1] & combinations_new[ , 2] == swap_out_chain) |
+					(combinations_new[ , 2] == min_s.f.[1] & combinations_new[ , 1] == swap_out_chain), ]
 
 		if (nrow(swap_in) == 0) {
 			message("pairs generated, but could not meet specified inclusions")
