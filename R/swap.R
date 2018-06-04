@@ -12,9 +12,9 @@ swap <- function(gp, s.f., combinations, min_c, max_c) {
 		## stuff to swap out: ##
 
 		highs <- names(sort(s.f., decreasing = TRUE)[sort(s.f., decreasing = TRUE) >= max_c])
-		for (i in 1:length(highs)) {
 
-			most_sampled <- which(gp[,1] == highs[i] | gp[,2] == highs[i])   # gives row indices for max(s.f.)
+
+			most_sampled <- which(gp[,1] == highs[1] | gp[,2] == highs[1])   # gives row indices for max(s.f.)
 
 			# not max chain
 			nmc <- which(gp[ , "chain"] != highs[i])
@@ -47,7 +47,7 @@ swap <- function(gp, s.f., combinations, min_c, max_c) {
 				swap_out1 <- sample(swap_out, 1)
 				swap_out_chain <- gp[swap_out1, "chain"] # a character string
 			}
-		}
+
 		if (length(swap_out) == 0) {
 			message("swap method stopped: could not find a pair to swap out")
 			break
