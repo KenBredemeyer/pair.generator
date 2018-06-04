@@ -16,7 +16,7 @@
 #'
 #' @export
 pairs_generate <- function(media, av_inclusions, inclusion_tolerance, seed = 1, animate = FALSE) {
-  #stopifnot(  )
+  stopifnot(av_inclusions %% 1 == 0)
 
 	stringsAsFactorsOption <- getOption("stringsAsFactors")
   options(stringsAsFactors = FALSE)
@@ -31,9 +31,9 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance, seed = 1, 
 		scripts <- media
 	}
 
-  if ((length(scripts) * av_inclusions %% 2) == 0) {
+  if ((length(scripts) * av_inclusions) %% 2 == 0) {
     pairs_length <- length(scripts) * av_inclusions / 2
-  } else if ((length(scripts) * av_inclusions %% 2) == 1) {
+  } else if ((length(scripts) * av_inclusions) %% 2 == 1) {
   	pairs_length <- (length(scripts) * av_inclusions + 1) / 2
   }
 
