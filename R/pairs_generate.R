@@ -10,9 +10,12 @@
 #' @param inclusion_tolerance Integer specifying the range around the average
 #'   number of incluisons.
 #' @param seed Integer. Random number seed.
+#' @param animate Logical or numeric. If logical, should inclusion plots be
+#'   produced? If numeric, the delay between frames is seconds via
+#'   \code{Sys.sleep}
 #'
 #' @export
-pairs_generate <- function(media, av_inclusions, inclusion_tolerance, seed = 1) {
+pairs_generate <- function(media, av_inclusions, inclusion_tolerance, seed = 1, animate = FALSE) {
   #stopifnot(  )
 
 	stringsAsFactorsOption <- getOption("stringsAsFactors")
@@ -41,7 +44,8 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance, seed = 1) 
   gp <- combinations[pairs_i, ]
 
   # generated pairs swapped
-  gps <- swap2(gp = gp, combinations = combinations, av_inclusions = av_inclusions, inclusion_tolerance = inclusion_tolerance)
+  gps <- swap2(gp = gp, combinations = combinations, av_inclusions = av_inclusions,
+  	           inclusion_tolerance = inclusion_tolerance, animate = animate)
   options(stringsAsFactors = stringsAsFactorsOption)
   attr(gps, "initial_sampling") <- gp
   gps

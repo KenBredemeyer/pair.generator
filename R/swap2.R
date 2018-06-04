@@ -1,5 +1,5 @@
 # swap pairs to improve inclusion range for performances
-swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance) {
+swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate = FALSE) {
 
 	min_c <- av_inclusions - inclusion_tolerance
 	max_c <- av_inclusions + inclusion_tolerance
@@ -68,19 +68,26 @@ swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance) {
 	  	gp[swap_out1, 1:2] <- swap_in
 			gp[swap_out1, 3] <- as.numeric(rownames(swap_in))
     }
-			# update s.f., above_max, below_min, equal_min
-			sampling <- rle(sort(unlist(gp[ , 1:2])))
-			s.f. <- sampling[[1]]
-			names(s.f.) <- sampling[[2]]
-			above_max <- names(s.f.[which(s.f. > max_c)])
-			below_min <- names(s.f.[which(s.f. < min_c)])
-			equal_min <- names(s.f.[which(s.f. == min_c)])
+		# update s.f., above_max, below_min, equal_min
+		sampling <- rle(sort(unlist(gp[ , 1:2])))
+		s.f. <- sampling[[1]]
+		names(s.f.) <- sampling[[2]]
+		above_max <- names(s.f.[which(s.f. > max_c)])
+		below_min <- names(s.f.[which(s.f. < min_c)])
+		equal_min <- names(s.f.[which(s.f. == min_c)])
 
-			Sys.sleep(0.4)
-      barplot(s.f., main = "swap method",
-          xlab = "scripts", ylab = "inclusions")
-		  abline(h = 7, lty = 2, col = "orange")
-			abline(h = 13, lty = 2, col = "orange")
+		if (is.numeric(animate)) {
+			speed <- animate
+			animate <- TRUE
+		} else if (is.numeric(animate)) speed = 0.2
+
+		if (animate) {
+			Sys.sleep(speed)
+	    barplot(s.f., main = "swap method",
+	        xlab = "scripts", ylab = "inclusions")
+		  abline(h = min_c, lty = 2, col = "orange")
+			abline(h = max_c, lty = 2, col = "orange")
+			}
 	}
 	gp
 }
