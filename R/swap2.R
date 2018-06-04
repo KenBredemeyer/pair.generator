@@ -61,11 +61,11 @@ swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate 
 			message("pairs generated, but could not meet specified inclusions")
 			break
 		} else if (nrow(swap_in) == 1) {
-	  	gp[swap_out1, 1:2] <- swap_in
+	  	gp[swap_out1, ] <- swap_in
 			gp[swap_out1, 3] <- as.numeric(rownames(swap_in))
 		} else if (nrow(swap_in) > 1) {
 		  swap_in <- swap_in[1,]   #or sample a row.
-	  	gp[swap_out1, 1:2] <- swap_in
+	  	gp[swap_out1, ] <- swap_in
 			gp[swap_out1, 3] <- as.numeric(rownames(swap_in))
     }
 		# update s.f., above_max, below_min, equal_min
