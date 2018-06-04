@@ -4,8 +4,28 @@
 \alias{pairs_generate}
 \title{Form pairs from scripts}
 \usage{
-pairs_generate(media, av_inclusions, inclusion_tolerance, seed = 1)
+pairs_generate(media, av_inclusions, inclusion_tolerance, seed = 1,
+  animate = FALSE)
+}
+\arguments{
+\item{media}{Character vector of media or performance labels, or a data.frame
+containing "media", "core", and "score" variables.}
+
+\item{av_inclusions}{Integer specifying the average number of inclusions per
+media or performance.}
+
+\item{inclusion_tolerance}{Integer specifying the range around the average
+number of incluisons.}
+
+\item{seed}{Integer. Random number seed.}
+
+\item{animate}{Logical or numeric. If logical, should inclusion plots be
+produced? If numeric, the delay between frames is seconds via
+\code{Sys.sleep}}
 }
 \description{
-Standard pairs generation
+Standard pairs generation.
+}
+\details{
+This function does not chain pairs.
 }
