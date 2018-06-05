@@ -45,7 +45,7 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance, seed = 1, 
 
   # generated pairs swapped
   gps <- swap2(gp = gp, combinations = combinations, av_inclusions = av_inclusions,
-  	           inclusion_tolerance = inclusion_tolerance, animate = animate)
+  	           inclusion_tolerance = inclusion_tolerance, animate = animate, seed = seed)
   options(stringsAsFactors = stringsAsFactorsOption)
   attr(gps, "initial_sampling") <- gp
   gps

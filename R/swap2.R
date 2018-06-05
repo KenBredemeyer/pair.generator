@@ -1,5 +1,5 @@
 # swap pairs to improve inclusion range for performances
-swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate = FALSE) {
+swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate = FALSE, seed) {
 
 	min_c <- av_inclusions - inclusion_tolerance
 	max_c <- av_inclusions + inclusion_tolerance
@@ -7,6 +7,7 @@ swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate 
 	# s.f. = sampling frequencies
 	s.f. <- sampling[[1]]
 	names(s.f.) <- sampling[[2]]
+	ulim <- max(s.f.)
 	# find scripts which do not conform to min & max inclusions
 	above_max <- names(s.f.[which(s.f. > max_c)])
 	below_min <- names(s.f.[which(s.f. < min_c)])
@@ -83,7 +84,9 @@ swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate 
 		if (animate) {
 			Sys.sleep(speed)
 	    barplot(s.f., main = "swap method",
-	        xlab = "scripts", ylab = "inclusions")
+	        xlab = "scripts", ylab = "inclusions",
+	    	  sub = paste0("rng seed: ", seed),
+	    	  ylim = c(0, ulim))
 		  abline(h = min_c, lty = 2, col = "orange")
 			abline(h = max_c, lty = 2, col = "orange")
 			}
