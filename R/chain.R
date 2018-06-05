@@ -1,4 +1,4 @@
-chain_once <- function(pairs, chain_length) {
+chain_once <- function(pairs, chain_length, times = j, n_performances) {
 	set.seed(1)
 	options(stringsAsFactors = FALSE)
 
@@ -9,6 +9,7 @@ chain_once <- function(pairs, chain_length) {
 
 	match_i <- list()
 	chain_i <- list()
+	chain_number <- list()
 
 	for (i in seq_along(performance)) {
 		x <- which(pairs_copy[ , 1] == performance[i] | pairs_copy[ , 2] == performance[i])
@@ -20,10 +21,13 @@ chain_once <- function(pairs, chain_length) {
 		} else if (length(match_i[[i]]) == 0) {
 			next
 		}
+		chain_number[[i]] <- rep(i + (times - 1)*n_performances, length(chain_i[[i]]))
 		delete_rows <- match(chain_i[[i]], pairs_copy[,3])
 		pairs_copy <- pairs_copy[-delete_rows, ]
 	}
+	chain_numbers <- unlist(chain_number)
 	chain_indicies <- unlist(chain_i)
+	data.frame(chain_indicies, chain_numbers)
 }
 
 
@@ -35,16 +39,21 @@ chain_once <- function(pairs, chain_length) {
 #' @export
 chain <- function(pairs, chain_length = 4) {
 	labels <- unique(unlist(pairs[ , 1:2]))
+	n_performances <- length(labels)
 	pairs.table <- cbind(pairs[ , 1:2], 1:nrow(pairs))
 	chain_rows <- list()
-  i = 1
+	chain_n <- list()
+  j = 1
 	while (dim(pairs.table)[1] > 0) {
 		# chain row indicies
-		chain_i <- chain_once(pairs.table, chain_length)
-		chain_rows[[i]] <- pairs.table[chain_i, 3]
+		chained <- chain_once(pairs.table, chain_length, j, n_performances)
+		chain_i <- chained[ , 1]
+		chain_n[[j]] <- chained[ , 2]
+		chain_rows[[j]] <- pairs.table[chain_i, 3]
 		pairs.table <- pairs.table[-chain_i, ]
-		i <- i + 1
+		j <- j + 1
 	}
 	chains_i <- unlist(chain_rows)
-	pairs[chains_i, ]
+	chain_nums <- unlist(chain_n)
+	cbind(pairs[chains_i, ], chain_nums)
 }
