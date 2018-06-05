@@ -54,6 +54,6 @@ chain <- function(pairs, chain_length = 4) {
 		j <- j + 1
 	}
 	chains_i <- unlist(chain_rows)
-	chain_nums <- unlist(chain_n)
-	cbind(pairs[chains_i, ], chain_nums)
+	chain_number <- unlist(chain_n)
+	cbind(pairs[chains_i, ], chain_number)
 }

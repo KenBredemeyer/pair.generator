@@ -8,7 +8,7 @@
 #'
 #' @param scripts Character vector of performances to compare.
 #'
-#' @param reps Integer value at least 1. Use this to make import file for
+#' @param n_judges Integer value at least 1. Use this to make import file for
 #'   multiple judges.  Use reps value at least equal to the number of judges.
 #'
 #' @return A data frame containing columns "left", "right" and "chain_number".
@@ -19,7 +19,7 @@
 #'   all_pairs(letters)
 #'
 #' @export
-pairs_all <- function(scripts, reps = 1) {
+pairs_all <- function(scripts, n_judges = 1) {
 	reps <- as.integer(reps)
 	if(reps < 1)
 		stop("second argument must be at least 1")
@@ -30,6 +30,6 @@ pairs_all <- function(scripts, reps = 1) {
 	count <- choose(length(scripts), 2)
 	pairs <- do.call(rbind, pairs)
 	df_out <- cbind(pairs, rep(1:reps, each = count))
-	colnames(df_out) <- c("left", "right", "chain_number")
+	colnames(df_out) <- c("left", "right", "judge")
 	as.data.frame(df_out)
 }
