@@ -18,7 +18,7 @@ intersperse_chains <- function(pairs, chain_length, seed = 1) {
 
   # rles to pais
   gp <- list()
-  for (i in seq_along(pairs$chain_number)) {
+  for (i in 1:length(unique(rles_copy$chain_number))) {
   	gp[[i]] <- pairs[pairs$chain_number == rles_copy$chain_number[i], ]
   }
   newpairs <- do.call(rbind, gp)

@@ -2,6 +2,7 @@
 
 export(chain)
 export(duplicates)
+export(intersperse_chains)
 export(pairs_all)
 export(pairs_export)
 export(pairs_generate)
