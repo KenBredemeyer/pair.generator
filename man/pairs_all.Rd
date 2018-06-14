@@ -4,12 +4,12 @@
 \alias{pairs_all}
 \title{Generate exhaustive pairs.}
 \usage{
-pairs_all(scripts, reps = 1)
+pairs_all(scripts, n_judges = 1)
 }
 \arguments{
 \item{scripts}{Character vector of performances to compare.}
 
-\item{reps}{Integer value at least 1. Use this to make import file for
+\item{n_judges}{Integer value at least 1. Use this to make import file for
 multiple judges.  Use reps value at least equal to the number of judges.}
 }
 \value{

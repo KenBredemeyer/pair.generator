@@ -11,16 +11,16 @@
 #' @param n_judges Integer value at least 1. Use this to make import file for
 #'   multiple judges.  Use reps value at least equal to the number of judges.
 #'
-#' @return A data frame containing columns "left", "right" and "chain_number".
-#'   "chain_number" can be read as judge number for the purposes of import into
-#'   Pairwise Comparisons Application.
+#' @return A data frame containing columns "left", "right" and "judge". If
+#'   you're importing into Pairwise Comparisons Application, change "judge" to
+#'   "chain_number".
 #'
 #' @examples
 #'   all_pairs(letters)
 #'
 #' @export
 pairs_all <- function(scripts, n_judges = 1) {
-	reps <- as.integer(reps)
+	reps <- as.integer(n_judges)
 	if(reps < 1)
 		stop("second argument must be at least 1")
   pairs <- list()
