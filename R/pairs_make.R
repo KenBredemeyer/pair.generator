@@ -55,6 +55,7 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 		}
 
 		if (is.numeric(separation_constraint)) {
+			stopifnot(!any(is.na(scripts$score)))
 			# make list of all possible pairings between core and non core
 			cnc_combinations <- expand.grid(scripts[,1], nc_scripts[,1])
 			# include scores
