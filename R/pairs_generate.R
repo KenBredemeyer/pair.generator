@@ -58,5 +58,6 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
   	           inclusion_tolerance = inclusion_tolerance, animate = animate, seed = seed)
   options(stringsAsFactors = stringsAsFactorsOption)
   attr(gps, "initial_sampling") <- gp
+  colnames(gps) <- c("left", "right", "combination")
   gps
 }
