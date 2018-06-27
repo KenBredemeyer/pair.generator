@@ -15,8 +15,12 @@
 #'   \code{Sys.sleep}
 #'
 #' @export
-pairs_generate <- function(media, av_inclusions, inclusion_tolerance, seed = 1, animate = FALSE) {
+pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
+	                         separation_constraint = NULL, seed = 1, animate = FALSE) {
   stopifnot(av_inclusions %% 1 == 0)
+	if (is.numeric(separation_constraint)) {
+		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
+	}
 
 	stringsAsFactorsOption <- getOption("stringsAsFactors")
   options(stringsAsFactors = FALSE)
@@ -40,6 +44,12 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance, seed = 1, 
   # form all pairs
   combinations <- data.frame(t(combn(scripts, 2)))   # allow for separation constraint
   combinations[,3] <- 1:dim(combinations)[1]
+  if (is.numeric(separation_constraint)) {
+  	combinations_scores <- data.frame(t(combn(media$score, 2)))
+  	available_comparisons_i <- which(abs(combinations_scores[,1] - combinations_scores[,2]) <= separation_constraint)
+  	combinations <- combinations[available_comparisons_i, ]
+  }
+
   pairs_i <- sample(dim(combinations)[1], pairs_length)  #! repeated pairs if pairs_length > dim(combinations)[1]  warn user of repeats
   gp <- combinations[pairs_i, ]
 
