@@ -138,7 +138,7 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 			# test minimum separation constraint that will *probably* not cause scale discontinuity
 			#test_min_separation(scripts$score, separation_constraint)
 
-			available_comparisons <- combinations[which(abs(combinations[,3] - combinations[,4]) < separation_constraint), ]
+			available_comparisons <- combinations[which(abs(combinations[,3] - combinations[,4]) <= separation_constraint), ]
 
 			n <- mean(min_c, max_c) * length(scripts$score)
 			n <- n + n %% chaining_constant                             # so required number of comparisons is a multiple of chaining constant
