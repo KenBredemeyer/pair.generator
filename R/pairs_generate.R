@@ -10,6 +10,8 @@
 #' @param inclusion_tolerance Integer specifying the range around the average
 #'   number of incluisons.
 #' @param seed Integer. Random number seed.
+#' @param separation_constraint Numeric. The maximum absolute score difference
+#'   between media/performances in a pair.
 #' @param animate Logical or numeric. If logical, should inclusion plots be
 #'   produced? If numeric, the delay between frames is seconds via
 #'   \code{Sys.sleep}
