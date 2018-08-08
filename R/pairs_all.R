@@ -19,17 +19,31 @@
 #'   all_pairs(letters)
 #'
 #' @export
-pairs_all <- function(scripts, n_judges = 1) {
+pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
+	if (!is.null(dim(media))) {
+		if(!is.null(media$media)) {
+		  scripts <- media$media
+		}
+	} else {
+		scripts <- media
+	}
 	reps <- as.integer(n_judges)
 	if(reps < 1)
 		stop("second argument must be at least 1")
+	combinations <- t(combn(scripts, 2))
+	if (is.numeric(separation_constraint)) {
+		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
+  	combinations_scores <- data.frame(t(combn(media$score, 2)), stringsAsFactors = FALSE)
+  	available_comparisons_i <- which(abs(combinations_scores[,1] - combinations_scores[,2]) <= separation_constraint)
+  	combinations <- combinations[available_comparisons_i, ]
+	}
   pairs <- list()
 		for (i in 1:reps) {
-			pairs[[i]] <- t(combn(scripts, 2))
+			pairs[[i]] <- combinations
 		}
-	count <- choose(length(scripts), 2)
+	count <- dim(combinations)[1]
 	pairs <- do.call(rbind, pairs)
 	df_out <- cbind(pairs, rep(1:reps, each = count))
 	colnames(df_out) <- c("left", "right", "judge")
-	as.data.frame(df_out)
+	as.data.frame(df_out, stringsAsFactors = FALSE)
 }
