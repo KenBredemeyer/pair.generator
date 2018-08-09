@@ -19,7 +19,7 @@
 #'   all_pairs(letters)
 #'
 #' @export
-pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
+pairs_all <- function(media, n_judges = 1, separation_constraint = NULL, chain_length = 1) {
 	if (!is.null(dim(media))) {
 		if(!is.null(media$media)) {
 		  scripts <- media$media
@@ -37,6 +37,7 @@ pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
   	available_comparisons_i <- which(abs(combinations_scores[,1] - combinations_scores[,2]) <= separation_constraint)
   	combinations <- combinations[available_comparisons_i, ]
 	}
+	combinations <- chain(combinations, chain_length = chain_length)
   pairs <- list()
 		for (i in 1:reps) {
 			pairs[[i]] <- combinations
