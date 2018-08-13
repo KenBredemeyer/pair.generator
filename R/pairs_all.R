@@ -19,7 +19,7 @@
 #'   all_pairs(letters)
 #'
 #' @export
-pairs_all <- function(media, n_judges = 1, separation_constraint = NULL, chain_length = 1) {
+pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
 	if (!is.null(dim(media))) {
 		if(!is.null(media$media)) {
 		  scripts <- media$media
@@ -37,7 +37,6 @@ pairs_all <- function(media, n_judges = 1, separation_constraint = NULL, chain_l
   	available_comparisons_i <- which(abs(combinations_scores[,1] - combinations_scores[,2]) <= separation_constraint)
   	combinations <- combinations[available_comparisons_i, ]
 	}
-	combinations <- chain(combinations, chain_length = chain_length)
   pairs <- list()
 		for (i in 1:reps) {
 			pairs[[i]] <- combinations
@@ -70,6 +69,7 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	if(reps < 1)
 		stop("second argument must be at least 1")
 	combinations <- data.frame(t(combn(scripts, 2)))
+
 	if (is.numeric(separation_constraint)) {
 		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
   	combinations_scores <- data.frame(t(combn(media$score, 2)), stringsAsFactors = FALSE)
@@ -79,8 +79,9 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	if (!is.null(head_order)) {
 		head <- length(head_order)
 		n_combin <- dim(combinations)[1]
-		combinations[1:head, ] <- combinations[order(head_order), ]
-		combinations[(head+1):n_combin, ] <- chain(combinations[-head_order, ], chain_length = chain_length)
+		combinations[1:head, ] <- combinations[head_order, ]
+		combinations[(head+1):n_combin, ] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 1:2]
+		combinations[(head+1):n_combin, 3] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 3] # + number of chains from head
 	} else {
 		combinations <- chain(combinations, chain_length = chain_length)
 	}
@@ -91,6 +92,6 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	count <- dim(combinations)[1]
 	pairs <- do.call(rbind, pairs)
 	df_out <- cbind(pairs, rep(1:reps, each = count))
-	colnames(df_out) <- c("left", "right", "chain", "judge")
+	colnames(df_out) <- c("left", "right", "chain_number", "judge")
 	as.data.frame(df_out, stringsAsFactors = FALSE)
 }
