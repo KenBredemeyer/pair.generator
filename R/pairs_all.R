@@ -50,12 +50,13 @@ pairs_all <- function(media, n_judges = 1, separation_constraint = NULL, chain_l
 }
 
 
-# for use in pairs_generate (multiple)
-#
-# combinations is one set of exhaustive pairs
-#
-# head_order is order of pairs from pairs_generate_.  Purpose is to allow
-# allocations without duplicates for any judge.
+#' for use in pairs_generate (multiple)
+#'
+#' combinations is one set of exhaustive pairs
+#'
+#' head_order is order of pairs from pairs_generate_.  Purpose is to allow
+#' allocations without duplicates for any judge.
+#' @export
 exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	                           head_order = NULL, chain_length = 1) {
 	if (!is.null(dim(media))) {
@@ -79,7 +80,9 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 		head <- length(head_order)
 		n_combin <- dim(combinations)[1]
 		combinations[1:head, ] <- combinations[order(head_order), ]
-		combinations[(head+1):n_combin, ] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 1:2] # or add combination variable to combinations?
+		combinations[(head+1):n_combin, ] <- chain(combinations[-head_order, ], chain_length = chain_length)
+	} else {
+		combinations <- chain(combinations, chain_length = chain_length)
 	}
   pairs <- list()
 		for (i in 1:reps) {
@@ -88,6 +91,6 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	count <- dim(combinations)[1]
 	pairs <- do.call(rbind, pairs)
 	df_out <- cbind(pairs, rep(1:reps, each = count))
-	colnames(df_out) <- c("left", "right", "judge")
+	colnames(df_out) <- c("left", "right", "chain", "judge")
 	as.data.frame(df_out, stringsAsFactors = FALSE)
 }
