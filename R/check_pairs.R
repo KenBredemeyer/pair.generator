@@ -20,3 +20,26 @@ score_diff <- function(pairs, media) {
 	colnames(joined)[3:4] <- c("left_score", "right_score")
 	joined
 }
+
+
+#' Test whether any judges have repeated comparisons
+#'
+#' @param allocated_pairs data.frame returned from \code{allocate}, or a list of
+#'   pairwise comparisons with \code{judge} variable.
+#' @return A message stating which if any judges have been allocated repeated
+#'   pairs.
+#' @seealso \code{\link{allocate}} \code{\link{duplicates}}
+any_judge_duplicates <- function(allocated_pairs) {
+	judge_sets <- split(allocated_cc, f = as.factor(allocated_cc$judge))
+	jdups <- lapply(judge_sets, duplicates)
+	n_duplicates <- lapply(jdups, nrow)
+
+	if (any(n_duplicates != 0)) {
+		judges_with_dups <- unname(which(unlist(n_duplicates) != 0))
+	  message("The following judges have more than one unique comparison: ")
+	  cat(judges_with_dups)
+	  message("\nUse duplicates() to find repeated comparisons")
+	} else if (all(n_duplicates == 0)) {
+		message("No repeated pairs for any judge")
+	}
+}
