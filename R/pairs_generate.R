@@ -1,23 +1,6 @@
 #' Form pairs from scripts
 #'
-#' Standard pairs generation.
-#'
-#' This function does not chain pairs.
-#' @param media Character vector of media or performance labels, or a data.frame
-#'   containing "media", "core", and "score" variables.
-#' @param av_inclusions Integer specifying the average number of inclusions per
-#'   media or performance.
-#' @param inclusion_tolerance Integer. What should the difference between
-#'   average inclusions and minimum inclusions, or between maximum inclusions
-#'   and average inclusions be.
-#' @param seed Integer. Random number seed.
-#' @param separation_constraint Numeric. The maximum absolute score difference
-#'   between media/performances in a pair.
-#' @param animate Logical or numeric. If logical, should inclusion plots be
-#'   produced? If numeric, the delay between frames is seconds via
-#'   \code{Sys.sleep}
-#'
-#' @export
+#' no duplicates.  function used in pairs_generate
 pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 	                         separation_constraint = NULL, seed = 1, animate = FALSE) {
   stopifnot(av_inclusions %% 1 == 0)
@@ -67,7 +50,31 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 
 
 
-#' generalized pair generator
+#' Form pairs of performances for pairwise comparisons
+#'
+#' Standard pairs generation.
+#'
+#' @param media Character vector of media or performance labels, or a data.frame
+#'   containing "media", "core", and "score" variables.
+#' @param av_inclusions Integer specifying the average number of inclusions per
+#'   media or performance.
+#' @param inclusion_tolerance Integer. What should the difference between
+#'   average inclusions and minimum inclusions, or between maximum inclusions
+#'   and average inclusions be.
+#' @param separation_constraint Numeric. The maximum absolute score difference
+#'   between media/performances in a pair.
+#' @param chain_length Integer. How many successive comparisons should share a
+#'   common performance.  Used for efficiency of judging.
+#' @param seed Integer. Random number seed parsed to \code{set.seed}
+#' @param animate Logical or numeric. If logical, should inclusion plots be
+#'   produced? If numeric, the delay between frames is seconds via
+#'   \code{Sys.sleep}
+#'
+#' @return A data frame containing the variables \code{left, right,
+#'   chain_number}.  \code{left} is the name of the performance to be presented
+#'   on the left side for judging.  \code{chain_number} indicates how
+#'   consecutive comparisons use common performances to increase the efficiency
+#'   of judging.
 #' @export
 pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 	separation_constraint = NULL, chain_length, seed = 1, animate = FALSE) {
@@ -82,7 +89,7 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 		gp <- pairs_generate_(media = media, av_inclusions = av_inclusions,
 			     inclusion_tolerance = inclusion_tolerance, separation_constraint = separation_constraint,
 			     seed = 1, animate = FALSE)
-		# gp <- chain(gp, )
+		gp <- chain(gp, chain_length = chain_length)
 	} else if(av_inclusions > n_scripts - 1) {
 		reps <- av_inclusions %/% (n_scripts - 1)
 		rem <- av_inclusions %% (n_scripts - 1)
@@ -108,6 +115,7 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 				                     chain_length = chain_length)
 		}
 	}
+  gp <- switch_lr(gp)
   gp
 }
 
