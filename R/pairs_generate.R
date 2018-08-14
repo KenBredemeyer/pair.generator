@@ -116,6 +116,6 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 		}
 	}
   gp <- switch_lr(gp)
-  gp
+  gp[ , c("left", "right", "chain_number")]
 }
 
