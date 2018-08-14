@@ -79,15 +79,16 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	if (!is.null(head_order)) {
 		head <- length(head_order)
 		n_combin <- dim(combinations)[1]
-		combinations[1:head, ] <- combinations[head_order, ]
-		combinations[(head+1):n_combin, ] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 1:2]
-		combinations[(head+1):n_combin, 3] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 3] # + number of chains from head
+		combinations_ <- combinations
+		combinations_[1:head, ] <- combinations[head_order, ]
+		combinations_[(head+1):n_combin, ] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 1:2]
+		combinations_[(head+1):n_combin, 3] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 3]
 	} else {
-		combinations <- chain(combinations, chain_length = chain_length)
+		combinations_ <- chain(combinations, chain_length = chain_length)
 	}
   pairs <- list()
 		for (i in 1:reps) {
-			pairs[[i]] <- combinations
+			pairs[[i]] <- combinations_
 		}
 	count <- dim(combinations)[1]
 	pairs <- do.call(rbind, pairs)
