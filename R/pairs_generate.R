@@ -18,7 +18,7 @@
 #'   \code{Sys.sleep}
 #'
 #' @export
-pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
+pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 	                         separation_constraint = NULL, seed = 1, animate = FALSE) {
   stopifnot(av_inclusions %% 1 == 0)
 	if (is.numeric(separation_constraint)) {
@@ -69,7 +69,7 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 
 #' generalized pair generator
 #' @export
-gen_pairs_g <- function(media, av_inclusions, inclusion_tolerance,
+pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 	separation_constraint = NULL, chain_length, seed = 1, animate = FALSE) {
 	# media can be vector or data.frame
 	if (!is.null(dim(media))) {
@@ -79,7 +79,7 @@ gen_pairs_g <- function(media, av_inclusions, inclusion_tolerance,
 	}
 	n_exhaustive_pairs <- n_scripts * (n_scripts - 1) / 2
 	if(av_inclusions <= n_scripts - 1) {
-		gp <- pairs_generate(media = media, av_inclusions = av_inclusions,
+		gp <- pairs_generate_(media = media, av_inclusions = av_inclusions,
 			     inclusion_tolerance = inclusion_tolerance, separation_constraint = separation_constraint,
 			     seed = 1, animate = FALSE)
 		# gp <- chain(gp, )
@@ -88,7 +88,7 @@ gen_pairs_g <- function(media, av_inclusions, inclusion_tolerance,
 		rem <- av_inclusions %% (n_scripts - 1)
 		# generate remaining pairs
 		if (rem != 0) {
-		gpr <- pairs_generate(media, av_inclusions = rem, inclusion_tolerance = inclusion_tolerance,
+		gpr <- pairs_generate_(media, av_inclusions = rem, inclusion_tolerance = inclusion_tolerance,
 			                    separation_constraint = separation_constraint, seed = 1, animate = FALSE)
 		gpr <- chain(gpr, chain_length = chain_length)
 
