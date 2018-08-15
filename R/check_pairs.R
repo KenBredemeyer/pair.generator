@@ -29,8 +29,9 @@ score_diff <- function(pairs, media) {
 #' @return A message stating which if any judges have been allocated repeated
 #'   pairs.
 #' @seealso \code{\link{allocate}} \code{\link{duplicates}}
+#' @export
 any_judge_duplicates <- function(allocated_pairs) {
-	judge_sets <- split(allocated_cc, f = as.factor(allocated_cc$judge))
+	judge_sets <- split(allocated_pairs, f = as.factor(allocated_pairs$judge))
 	jdups <- lapply(judge_sets, duplicates)
 	n_duplicates <- lapply(jdups, nrow)
 
