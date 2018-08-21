@@ -36,6 +36,11 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
   	combinations <- combinations[available_comparisons_i, ]
   }
 
+  if (dim(combinations)[1] < pairs_length) {
+  	stop("Not enough available combinations to meet the required inclusions of performances. \n
+          Check the separation constraint is large enough to accomodate the number of pairs required.")
+  }
+
   pairs_i <- sample(dim(combinations)[1], pairs_length)  #! repeated pairs if pairs_length > dim(combinations)[1]  warn user of repeats
   gp <- combinations[pairs_i, ]
 
