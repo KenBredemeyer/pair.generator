@@ -6,6 +6,7 @@
 #'   pairs evenly to, or a vector of integers specifying the number of pairs to
 #'   allocate to each judge.
 #' @return data frame with pairs and judge number.
+#' @export
 allocate <- function(pairs, judges) {
 	# allocate pairs_each (equal pairs for each judge)
 	if (length(judges) == 1) {
