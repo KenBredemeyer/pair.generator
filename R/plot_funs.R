@@ -57,3 +57,29 @@ pairs_plot <- function(pairs) {
 		yaxt="n", ylim = c(min(unique_pairs[[1]])-1, max(unique_pairs[[1]])))
 	axis(side = 2, at = 0:max(unique_pairs[[1]]) )
 }
+
+
+
+#' Plot the scores of performances in each pair
+#'
+#' This plot can be used to check that groups of performances are not isolate, and
+#' provides an indication that the separation constraint used in
+#' \code{pairs_generate} or similar function is working correctly.
+#'
+#' @param pairs Data frame returned from \code{pairs_generate} or similar function.
+#' @param scores_df Data frame containing the variables \code{media, core, score}
+#' @export
+pairs_plot_scores <- function(pairs, scores_df) {
+  pairs_table <- merge(pairs, scores_df, by.x = "left", by.y = "media", sort = FALSE)
+  pairs_table <- merge(pairs_table, scores_df, by.x = "right", by.y = "media", sort = FALSE)
+	plot(-1, -1, xlim = c(0, 1.1), ylim = c(0, max(c(pairs_table$score.x, pairs_table$score.y))), xlab = "", ylab = "score", xaxt = "na",
+	     main = "Paired Comparisons \n showing locations of pairings",
+	     sub = "Pairings")
+	axis(side = 1, at = 0:1, labels = c("left", "right"))
+	for(i in 1:nrow(pairs_table)) {
+	  lines(c(0, 1), c(pairs_table[i, "score.x"], pairs_table[i, "score.y"]))
+	  text(c(0, 1), c(pairs_table[i, "score.x"], pairs_table[i, "score.y"]),
+	       labels = pairs_table[i, 1:2], pos = c(2, 4), offset = c(0.2, 0.2))
+	}
+}
+
