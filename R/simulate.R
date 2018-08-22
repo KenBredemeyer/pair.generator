@@ -7,15 +7,15 @@
 #' @param ... args supplied to \code{fun}.  Use \code{min, max} for \code{runif}
 #'   or \code{mead, sd} for \code{rnorm}.
 #' @export
-sim_judge <- function(performances, pairs, distribution = "uniform", ...) {
+sim_judge <- function(performances, pairs, distribution = "uniform", min, max, mean, sd) {
   stopifnot(any(distribution == c("uniform", "random")))
 	x <- data.frame(media = performances)
   nrows_x <- dim(x)[1]
 
 	if (distribution == "uniform") {
-	  x$beta <- runif(nrows_x, min, max)
+	  x$beta <- stats::runif(nrows_x, min, max)
 	} else if(distribution == "random") {
-		x$beta <- rnorm(nrows_x, mean, sd)
+		x$beta <- stats::rnorm(nrows_x, mean, sd)
 	}
 
 	judgements <- dplyr::left_join(pairs, x, by = c("left" = "media"))
@@ -27,7 +27,7 @@ sim_judge <- function(performances, pairs, distribution = "uniform", ...) {
 		exp(b1 - b2) / (1 + exp(b1 - b2))
 	}
 
-	judgements[,8] <- rbinom(dim(judgements)[1], 1, P(judgements[,6], judgements[,7]))
+	judgements[,8] <- stats::rbinom(dim(judgements)[1], 1, P(judgements[,6], judgements[,7]))
 	colnames(judgements)[8] <- "left_wins"
 
 	judgements
