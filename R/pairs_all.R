@@ -61,6 +61,15 @@ pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
 #'
 #' head_order is order of pairs from pairs_generate_.  Purpose is to allow
 #' allocations without duplicates for any judge.
+#' @param media Character vector representing the names of the performances, or
+#'   a data.frame containing the variables \code{media, core, score}.
+#' @param n_judges Integer specifying the number of sets of exhaustive pairs to
+#'   generate.
+#' @param separation_constraint Numeric.  Maximum absolute score difference
+#'   between performances in a pair.
+#' @param head_order Numeric vector specifying the order of generated pairs.
+#' @param chain_length Integer. The number of consecutive pairs containing a
+#'   common performance.
 #' @export
 exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	                           head_order = NULL, chain_length = 1) {

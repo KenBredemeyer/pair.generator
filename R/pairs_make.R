@@ -20,6 +20,7 @@
 #'   and \code{max_c} are relevant for \code{type = "standard_pairs"} only.
 #' @param max_c Integer. The maximum number of times a performance should be
 #'   included.
+#' @param seed Integer. rng seed.
 #' @return A data frame with paired performances, where "left" and "right" form
 #'   the pair. "combination" is the row number corresponding to a data frame
 #'   containing all possiblge pairs, used for checks. For importing into an
