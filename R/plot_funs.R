@@ -1,6 +1,6 @@
 #' barchart to see how well each script is represented.
 #'
-#' @param x A data frame containing pairs of performances.
+#' @param pairs A data frame containing pairs of performances.
 #' @export
 pairs_plot_inclusions <- function(pairs) {
 	sampling <- rle(sort(unlist(pairs[ , 1:2])))
@@ -8,12 +8,12 @@ pairs_plot_inclusions <- function(pairs) {
 	names(s.f.) <- sampling[[2]]
 	uylim <- max(s.f.)
 
-	barplot(s.f., ylim = c(0, uylim), main = "Inclusions of Performances",
+	graphics::barplot(s.f., ylim = c(0, uylim), main = "Inclusions of Performances",
 	        sub = paste("number of performances =", length(unique(unlist(pairs[ ,1:2]))),
 	        	           ", number of pairs = ", nrow(pairs), sep = ""),
 		      xlab = "", ylab = "inclusions")
-	abline(h = attributes(pairs)$user_inputs$min_c, lty = 2, col = "orange")
-	abline(h = attributes(pairs)$user_inputs$max_c, lty = 2, col = "orange")
+	graphics::abline(h = attributes(pairs)$user_inputs$min_c, lty = 2, col = "orange")
+	graphics::abline(h = attributes(pairs)$user_inputs$max_c, lty = 2, col = "orange")
 }
 
 #' Range of inclusions per media/performance
