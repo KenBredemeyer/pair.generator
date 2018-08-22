@@ -128,8 +128,8 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 		if (length(scripts$media) < 2) stop("must have at least 2 performances to compare")
 
 		# create all possible combinations of pairs
-		combination_labels <- t(combn(scripts$media, 2))
-		combination_values <- (t(combn(scripts$score, 2)))
+		combination_labels <- t(utils::combn(scripts$media, 2))
+		combination_values <- (t(utils::combn(scripts$score, 2)))
 		combinations <- cbind(combination_labels, as.data.frame(combination_values))
 
 
@@ -155,7 +155,7 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 
 		s1 <- sampler(scripts$media, n/chaining_constant)    # s1 = sample 1.  How many to sample from compared to n?
 		if (!is.numeric(separation_constraint))
-			combinations <- t(combn(scripts$media, 2))
+			combinations <- t(utils::combn(scripts$media, 2))
 
 		# s1_c = sample 1 combinations
 		# gp = generated pairs (core)
