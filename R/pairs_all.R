@@ -6,17 +6,23 @@
 #' using any number of judges.  Each judge will view all pairs. Allocate
 #' n*(n-1)/2 pairs to each judge.
 #'
-#' @param scripts Character vector of performances to compare.
+#' @param media Character vector of performances to compare, or data frame
+#'   containting the variables \code{media, core, score}.
 #'
 #' @param n_judges Integer value at least 1. Use this to make import file for
 #'   multiple judges.  Use reps value at least equal to the number of judges.
+#'
+#' @param separation_constraint Numeric. Maximum absolute difference in scores
+#'   for performances in a pair.  If a separation constraint is specified, which
+#'   is less than the maximum absolute difference between any two performances,
+#'   then the resulting design will not be exhaustive.
 #'
 #' @return A data frame containing columns "left", "right" and "judge". If
 #'   you're importing into Pairwise Comparisons Application, change "judge" to
 #'   "chain_number".
 #'
 #' @examples
-#'   all_pairs(letters)
+#'   pairs_all(letters)
 #'
 #' @export
 pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
