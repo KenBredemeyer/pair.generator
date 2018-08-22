@@ -10,16 +10,17 @@
 sim_judge <- function(performances, pairs, distribution = "uniform", ...) {
   stopifnot(any(distribution == c("uniform", "random")))
 	x <- data.frame(media = performances)
+  nrows_x <- dim(x)[1]
 
 	if (distribution == "uniform") {
-	  x$beta <- runif(dim(x)[1], min, max)
+	  x$beta <- runif(nrows_x, min, max)
 	} else if(distribution == "random") {
-		x$beta <- rnorm(length(x), mean, sd)
+		x$beta <- rnorm(nrows_x, mean, sd)
 	}
 
-	judgements <- left_join(pairs, x, by = c("left" = "media"))
+	judgements <- dplyr::left_join(pairs, x, by = c("left" = "media"))
 	colnames(judgements)[6] <- "left_beta"
-	judgements <- left_join(judgements, x, by = c("right" = "media"))
+	judgements <- dplyr::left_join(judgements, x, by = c("right" = "media"))
 	colnames(judgements)[7] <- "right_beta"
 
 	P <- function(b1, b2) {
@@ -32,4 +33,3 @@ sim_judge <- function(performances, pairs, distribution = "uniform", ...) {
 	judgements
 }
 
-sim_judge(letters, gp, min = 0, max = 100)
