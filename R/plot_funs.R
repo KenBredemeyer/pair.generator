@@ -37,7 +37,7 @@ pairs_plot <- function(pairs) {
 	scripts_ordered <- scripts[order(scripts)]
 
 	# all possible pairs of combinations
-	combinations <- t(combn(scripts_ordered, 2))
+	combinations <- t(utils::combn(scripts_ordered, 2))
 
 	# add 'combination' column to data to test for repetitions of pairs & distribution of pairs
 	z <- vector("numeric", nrow(pairs))
@@ -50,12 +50,12 @@ pairs_plot <- function(pairs) {
 
 	# plot inclusion of pairs
 	unique_pairs <- rle(sort(z))
-	plot(unique_pairs[[2]], unique_pairs[[1]], pch = 20,
+	graphics::plot(unique_pairs[[2]], unique_pairs[[1]], pch = 20,
 	  main = "Inclusions of Pairs", xlab = "Unique Pair Combination", ylab = "Frequency",
 	  sub = paste(nrow(pairs), "Pairs, ", nrow(combinations), "Combinations"),
 		font.sub = 3,
 		yaxt="n", ylim = c(min(unique_pairs[[1]])-1, max(unique_pairs[[1]])))
-	axis(side = 2, at = 0:max(unique_pairs[[1]]) )
+	graphics::axis(side = 2, at = 0:max(unique_pairs[[1]]) )
 }
 
 
@@ -72,13 +72,13 @@ pairs_plot <- function(pairs) {
 pairs_plot_scores <- function(pairs, scores_df) {
   pairs_table <- merge(pairs, scores_df, by.x = "left", by.y = "media", sort = FALSE)
   pairs_table <- merge(pairs_table, scores_df, by.x = "right", by.y = "media", sort = FALSE)
-	plot(-1, -1, xlim = c(0, 1.1), ylim = c(0, max(c(pairs_table$score.x, pairs_table$score.y))), xlab = "", ylab = "score", xaxt = "na",
+	graphics::plot(-1, -1, xlim = c(0, 1.1), ylim = c(0, max(c(pairs_table$score.x, pairs_table$score.y))), xlab = "", ylab = "score", xaxt = "na",
 	     main = "Paired Comparisons \n showing locations of pairings",
 	     sub = "Pairings")
-	axis(side = 1, at = 0:1, labels = c("left", "right"))
+	graphics::axis(side = 1, at = 0:1, labels = c("left", "right"))
 	for(i in 1:nrow(pairs_table)) {
-	  lines(c(0, 1), c(pairs_table[i, "score.x"], pairs_table[i, "score.y"]))
-	  text(c(0, 1), c(pairs_table[i, "score.x"], pairs_table[i, "score.y"]),
+	  graphics::lines(c(0, 1), c(pairs_table[i, "score.x"], pairs_table[i, "score.y"]))
+	  graphics::text(c(0, 1), c(pairs_table[i, "score.x"], pairs_table[i, "score.y"]),
 	       labels = pairs_table[i, 1:2], pos = c(2, 4), offset = c(0.2, 0.2))
 	}
 }

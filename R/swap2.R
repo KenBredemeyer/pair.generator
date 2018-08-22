@@ -83,12 +83,12 @@ swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate 
 
 		if (animate) {
 			Sys.sleep(speed)
-	    barplot(s.f., main = "swap method",
+	    graphics::barplot(s.f., main = "swap method",
 	        xlab = "scripts", ylab = "inclusions",
 	    	  sub = paste0("rng seed: ", seed),
 	    	  ylim = c(0, ulim))
-		  abline(h = min_c, lty = 2, col = "orange")
-			abline(h = max_c, lty = 2, col = "orange")
+		  graphics::abline(h = min_c, lty = 2, col = "orange")
+			graphics::abline(h = max_c, lty = 2, col = "orange")
 			}
 	}
 	gp
