@@ -30,10 +30,10 @@ pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
 	reps <- as.integer(n_judges)
 	if(reps < 1)
 		stop("second argument must be at least 1")
-	combinations <- t(combn(scripts, 2))
+	combinations <- t(utils::combn(scripts, 2))
 	if (is.numeric(separation_constraint)) {
 		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
-  	combinations_scores <- data.frame(t(combn(media$score, 2)), stringsAsFactors = FALSE)
+  	combinations_scores <- data.frame(t(utils::combn(media$score, 2)), stringsAsFactors = FALSE)
   	available_comparisons_i <- which(abs(combinations_scores[,1] - combinations_scores[,2]) <= separation_constraint)
   	combinations <- combinations[available_comparisons_i, ]
 	}
@@ -68,11 +68,11 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	reps <- as.integer(n_judges)
 	if(reps < 1)
 		stop("second argument must be at least 1")
-	combinations <- data.frame(t(combn(scripts, 2)))
+	combinations <- data.frame(t(utils::combn(scripts, 2)))
 
 	if (is.numeric(separation_constraint)) {
 		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
-  	combinations_scores <- data.frame(t(combn(media$score, 2)), stringsAsFactors = FALSE)
+  	combinations_scores <- data.frame(t(utils::combn(media$score, 2)), stringsAsFactors = FALSE)
   	available_comparisons_i <- which(abs(combinations_scores[,1] - combinations_scores[,2]) <= separation_constraint)
   	combinations <- combinations[available_comparisons_i, ]
 	}

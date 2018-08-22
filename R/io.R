@@ -27,7 +27,7 @@
 #'
 #' @export
 pairs_import.csv <- function(scores_file, separation_constraint = FALSE) {
-	input_data <- read.csv(scores_file, stringsAsFactors = FALSE)
+	input_data <- utils::read.csv(scores_file, stringsAsFactors = FALSE)
 
   stopifnot(colnames(input_data) == c("media", "core", "score"),
   	        !any(is.na(input_data$media)),
@@ -54,5 +54,5 @@ pairs_import.csv <- function(scores_file, separation_constraint = FALSE) {
 #' @export
 pairs_export <- function(gp, file) {
 	x <- gp[ , c("left", "right", "chain_number")]
-	write.csv(x, file, row.names = FALSE)
+	utils::write.csv(x, file, row.names = FALSE)
 }
