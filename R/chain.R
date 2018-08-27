@@ -1,4 +1,4 @@
-chain_once <- function(pairs, chain_length, times = j, n_performances) {
+chain_once <- function(pairs, chain_length, times, n_performances) {
 	set.seed(1)
 	options(stringsAsFactors = FALSE)
 
@@ -46,7 +46,7 @@ chain <- function(pairs, chain_length = 4) {
   j = 1
 	while (dim(pairs.table)[1] > 0) {
 		# chain row indicies
-		chained <- chain_once(pairs.table, chain_length, j, n_performances)
+		chained <- chain_once(pairs.table, chain_length, times = j, n_performances)
 		chain_i <- chained[ , 1]
 		chain_n[[j]] <- chained[ , 2]
 		chain_rows[[j]] <- pairs.table[chain_i, 3]
