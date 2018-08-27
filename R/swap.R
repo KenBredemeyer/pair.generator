@@ -6,6 +6,7 @@ swap <- function(gp, s.f., combinations, min_c, max_c) {
 	below_min <- names(s.f.[which(s.f. < min_c)])
 	equal_min <- names(s.f.[which(s.f. == min_c)])
 
+	i <- 1   #!!!!! check this!
 	while (length(above_max) > 0 | length(below_min) > 0) {
 		min_s.f. <- names(which(s.f. == min(s.f.)))    # can have length more than 1
 		not_min_chain <- as.numeric(rownames(gp[gp[,"chain"]!=min_s.f.[1], ]))
@@ -79,7 +80,7 @@ swap <- function(gp, s.f., combinations, min_c, max_c) {
 			above_max <- names(s.f.[which(s.f. > max_c)])
 			below_min <- names(s.f.[which(s.f. < min_c)])
 			equal_min <- names(s.f.[which(s.f. == min_c)])
-
+    i <- i + 1
 	}
 	gp
 }
