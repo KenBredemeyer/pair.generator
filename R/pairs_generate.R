@@ -10,9 +10,9 @@
 #'   inclusions.
 #' @param separation_constraint Numeric.  Maximum absolute difference in scores
 #'   between performances in a pair.
-#' @seed.  Numeric rng seed.
-#' @animate. Logical.  Should plots be generated showing how inclusions of
-#' performances are modified.
+#' @param seed.  Numeric rng seed.
+#' @param animate. Logical.  Should plots be generated showing how inclusions of
+#'   performances are modified.
 pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 	                         separation_constraint = NULL, seed = 1, animate = FALSE) {
   stopifnot(av_inclusions %% 1 == 0)
@@ -40,10 +40,10 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
   }
 
   # form all pairs
-  combinations <- data.frame(t(combn(scripts, 2)))   # allow for separation constraint
+  combinations <- data.frame(t(utils::combn(scripts, 2)))   # allow for separation constraint
   combinations[,3] <- 1:dim(combinations)[1]
   if (is.numeric(separation_constraint)) {
-  	combinations_scores <- data.frame(t(combn(media$score, 2)))
+  	combinations_scores <- data.frame(t(utils::combn(media$score, 2)))
   	available_comparisons_i <- which(abs(combinations_scores[,1] - combinations_scores[,2]) <= separation_constraint)
   	combinations <- combinations[available_comparisons_i, ]
   }
