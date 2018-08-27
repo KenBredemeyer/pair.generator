@@ -4,18 +4,24 @@
 \alias{pairs_all}
 \title{Generate exhaustive pairs.}
 \usage{
-pairs_all(scripts, n_judges = 1)
+pairs_all(media, n_judges = 1, separation_constraint = NULL)
 }
 \arguments{
-\item{scripts}{Character vector of performances to compare.}
+\item{media}{Character vector of performances to compare, or data frame
+containting the variables \code{media, core, score}.}
 
 \item{n_judges}{Integer value at least 1. Use this to make import file for
 multiple judges.  Use reps value at least equal to the number of judges.}
+
+\item{separation_constraint}{Numeric. Maximum absolute difference in scores
+for performances in a pair.  If a separation constraint is specified, which
+is less than the maximum absolute difference between any two performances,
+then the resulting design will not be exhaustive.}
 }
 \value{
-A data frame containing columns "left", "right" and "chain_number".
-  "chain_number" can be read as judge number for the purposes of import into
-  Pairwise Comparisons Application.
+A data frame containing columns "left", "right" and "judge". If
+  you're importing into Pairwise Comparisons Application, change "judge" to
+  "chain_number".
 }
 \description{
 \code{all_pairs} generates all unique pairs for pairwise comparisons.
@@ -26,6 +32,6 @@ using any number of judges.  Each judge will view all pairs. Allocate
 n*(n-1)/2 pairs to each judge.
 }
 \examples{
-  all_pairs(letters)
+  pairs_all(letters)
 
 }

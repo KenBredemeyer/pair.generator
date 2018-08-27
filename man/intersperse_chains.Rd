@@ -4,12 +4,15 @@
 \alias{intersperse_chains}
 \title{intersperse incomplete chains with full chains}
 \usage{
-intersperse_chains(pairs, chain_length, seed = 1L)
+intersperse_chains(pairs, chain_length, seed = 1)
 }
 \arguments{
 \item{pairs}{data.frame containing chained pairs, returned from \code{chain}.}
 
-\item{chain_length}{Integer.}
+\item{chain_length}{Integer specifying the number of consecutive pairs to
+include a common performance.}
+
+\item{seed}{Interger parsed to \code{set.seed}.}
 }
 \description{
 intersperse incomplete chains with full chains

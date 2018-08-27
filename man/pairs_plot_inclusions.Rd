@@ -4,10 +4,10 @@
 \alias{pairs_plot_inclusions}
 \title{barchart to see how well each script is represented.}
 \usage{
-pairs_plot_inclusions(gp)
+pairs_plot_inclusions(pairs)
 }
 \arguments{
-\item{x}{A data frame containing pairs of performances.}
+\item{pairs}{A data frame containing pairs of performances.}
 }
 \description{
 barchart to see how well each script is represented.

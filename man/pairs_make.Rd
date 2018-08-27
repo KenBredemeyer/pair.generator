@@ -32,6 +32,8 @@ and \code{max_c} are relevant for \code{type = "standard_pairs"} only.}
 
 \item{max_c}{Integer. The maximum number of times a performance should be
 included.}
+
+\item{seed}{Integer. rng seed.}
 }
 \value{
 A data frame with paired performances, where "left" and "right" form

@@ -2,9 +2,10 @@
 % Please edit documentation in R/pairs_generate.R
 \name{pairs_generate}
 \alias{pairs_generate}
-\title{Form pairs from scripts}
+\title{Form pairs of performances for pairwise comparisons}
 \usage{
-pairs_generate(media, av_inclusions, inclusion_tolerance, seed = 1,
+pairs_generate(media, av_inclusions, inclusion_tolerance,
+  separation_constraint = NULL, chain_length, seed = 1,
   animate = FALSE)
 }
 \arguments{
@@ -14,18 +15,29 @@ containing "media", "core", and "score" variables.}
 \item{av_inclusions}{Integer specifying the average number of inclusions per
 media or performance.}
 
-\item{inclusion_tolerance}{Integer specifying the range around the average
-number of incluisons.}
+\item{inclusion_tolerance}{Integer. What should the difference between
+average inclusions and minimum inclusions, or between maximum inclusions
+and average inclusions be.}
 
-\item{seed}{Integer. Random number seed.}
+\item{separation_constraint}{Numeric. The maximum absolute score difference
+between media/performances in a pair.}
+
+\item{chain_length}{Integer. How many successive comparisons should share a
+common performance.  Used for efficiency of judging.}
+
+\item{seed}{Integer. Random number seed parsed to \code{set.seed}}
 
 \item{animate}{Logical or numeric. If logical, should inclusion plots be
 produced? If numeric, the delay between frames is seconds via
 \code{Sys.sleep}}
 }
+\value{
+A data frame containing the variables \code{left, right,
+  chain_number}.  \code{left} is the name of the performance to be presented
+  on the left side for judging.  \code{chain_number} indicates how
+  consecutive comparisons use common performances to increase the efficiency
+  of judging.
+}
 \description{
 Standard pairs generation.
-}
-\details{
-This function does not chain pairs.
 }
