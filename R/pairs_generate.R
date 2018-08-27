@@ -10,8 +10,8 @@
 #'   inclusions.
 #' @param separation_constraint Numeric.  Maximum absolute difference in scores
 #'   between performances in a pair.
-#' @param seed.  Numeric rng seed.
-#' @param animate. Logical.  Should plots be generated showing how inclusions of
+#' @param seed  Numeric rng seed.
+#' @param animate Logical.  Should plots be generated showing how inclusions of
 #'   performances are modified.
 pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 	                         separation_constraint = NULL, seed = 1, animate = FALSE) {
