@@ -1,7 +1,9 @@
 #' intersperse incomplete chains with full chains
 #'
 #' @param pairs data.frame containing chained pairs, returned from \code{chain}.
-#' @param chain_length Integer.
+#' @param chain_length Integer specifying the number of consecutive pairs to
+#'   include a common performance.
+#' @param seed Interger parsed to \code{set.seed}.
 #' @export
 intersperse_chains <- function(pairs, chain_length, seed = 1) {
   set.seed(seed)
