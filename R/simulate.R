@@ -2,9 +2,12 @@
 #' simulate judgements of pairwise comparisons
 #'
 #' @param performances Character vector of media or performance labels.
-#' @param pairs data.frame returned from \code{pairs_generate}
-#' @param distribution Character string. \code{"uniform"} or \code{"normal"}
-#' @param ... args supplied to \code{fun}.  Use \code{min, max} for \code{runif}
+#' @param pairs data.frame returned from \code{pairs_generate}.
+#' @param distribution Character string. \code{"uniform"} or \code{"normal"}.
+#' @param min Numeric. Minimum value for the uniform distribution.
+#' @param max Numeric. Maximum value for the uniform distribution.
+#' @param mean Numeric.  Mean of the normal distribution.
+#' @param sd Numeric.  Standard deviation for the normal distribution.
 #'   or \code{mead, sd} for \code{rnorm}.
 #' @export
 sim_judge <- function(performances, pairs, distribution = "uniform", min, max, mean, sd) {
