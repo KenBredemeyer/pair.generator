@@ -35,34 +35,3 @@ reverse_duplicates <- function(gp) {
 		message(paste0("no reverse duplicates found in ", name))
 	}
 }
-
-#' Frequency plot of pairs
-#'
-#' @param pairs data.frame returned from \code{pairs_make}.
-#' @export
-plot_pairs <- function(pairs) {
-	## plot pairs to detect duplicates
-	# recover script labels
-	scripts <- unique(unlist(pairs[,1:2]))
-	scripts_ordered <- scripts[order(scripts)]
-
-	# all possible pairs of combinations
-	combinations <- t(combn(scripts_ordered, 2))
-
-	# add 'combination' column to data to test for repetitions of pairs & distribution of pairs
-	z <- vector("numeric", nrow(pairs))
-	for (i in 1:nrow(pairs)) {
-	  z[i] <- which((combinations[, 1] == pairs[i, 1] & combinations[ , 2] == pairs[i, 2]) |
-	                 (combinations[, 2] == pairs[i, 1] & combinations[ , 1] == pairs[i, 2]) )
-	}
-
-	pairs <- cbind(pairs, z)
-
-	# plot inclusion of pairs (`gpairs` = graph pairs)
-	rle(sort(z)) -> gpairs
-	plot(gpairs[[2]], gpairs[[1]],
-	  main = "Inclusions of Pairs", xlab = "Unique Pair Combination", ylab = "Frequency",
-	  sub = paste(nrow(pairs), "Pairs, ", nrow(combinations), "Combinations"))
-}
-
-
