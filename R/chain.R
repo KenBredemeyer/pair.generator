@@ -24,6 +24,7 @@ chain_once <- function(pairs, chain_length, times, n_performances) {
 		delete_rows <- match(chain_i[[i]], pairs_copy[,3])
 		pairs_copy <- pairs_copy[-delete_rows, ]
 	}
+	options(stringsAsFactors = stringsAsFactorsOption)
 	chain_numbers <- unlist(chain_number)
 	chain_indicies <- unlist(chain_i)
 	data.frame(chain_indicies, chain_numbers)
@@ -54,6 +55,5 @@ chain <- function(pairs, chain_length = 4) {
 	}
 	chains_i <- unlist(chain_rows)
 	chain_number <- unlist(chain_n)
-	options(stringsAsFactors = stringsAsFactorsOption)
 	cbind(pairs[chains_i, ], chain_number)
 }
