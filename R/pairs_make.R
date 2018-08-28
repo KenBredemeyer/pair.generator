@@ -20,15 +20,13 @@
 #'   and \code{max_c} are relevant for \code{type = "standard_pairs"} only.
 #' @param max_c Integer. The maximum number of times a performance should be
 #'   included.
-#' @param seed Integer. rng seed.
 #' @return A data frame with paired performances, where "left" and "right" form
 #'   the pair. "combination" is the row number corresponding to a data frame
 #'   containing all possiblge pairs, used for checks. For importing into an
 #'   interface for judging, use only "left", "right" and "chain_number".
 #' @export
 pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separation_constraint = FALSE,
-	                         nc_include = NA, min_c = 10, max_c = 20, seed = 1) {
-  set.seed(seed)
+	                         nc_include = NA, min_c = 10, max_c = 20) {
   stopifnot(type == "core_noncore" | type == "standard_pairs")
 
   stringsAsFactorsOption <- getOption("stringsAsFactors")
@@ -197,7 +195,7 @@ pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separa
 		gp[,1:2] <- switch_lr(gp[,1:2])
 		attr(gp, "user_inputs") <- list(type = type, chaining_constant = chaining_constant,
 			                              separation_constraint = separation_constraint,
-	                                   nc_include = nc_include, min_c = min_c, max_c = max_c, seed = seed)
+	                                   nc_include = nc_include, min_c = min_c, max_c = max_c)
 		options(stringsAsFactors = stringsAsFactorsOption)
 		return(gp)
 	}

@@ -3,10 +3,8 @@
 #' @param pairs data.frame containing chained pairs, returned from \code{chain}.
 #' @param chain_length Integer specifying the number of consecutive pairs to
 #'   include a common performance.
-#' @param seed Interger parsed to \code{set.seed}.
 #' @export
-intersperse_chains <- function(pairs, chain_length, seed = 1) {
-  set.seed(seed)
+intersperse_chains <- function(pairs, chain_length) {
   rles <- rle(pairs$chain_number)
   rles <- data.frame(chain_number = rles$values, len = rles$lengths)
   incomplete_i <- which(rles[,2] < chain_length)

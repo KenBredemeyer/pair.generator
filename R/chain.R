@@ -1,5 +1,4 @@
 chain_once <- function(pairs, chain_length, times, n_performances) {
-	set.seed(1)
 	stringsAsFactorsOption <- getOption("stringsAsFactors")
   options(stringsAsFactors = FALSE)
 	pairs_copy <- data.frame(pairs[ , 1:2])

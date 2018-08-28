@@ -1,5 +1,5 @@
 # swap pairs to improve inclusion range for performances
-swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate = FALSE, seed) {
+swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate = FALSE) {
 
 	min_c <- av_inclusions - inclusion_tolerance
 	max_c <- av_inclusions + inclusion_tolerance
@@ -85,7 +85,6 @@ swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate 
 			Sys.sleep(speed)
 	    graphics::barplot(s.f., main = "swap method",
 	        xlab = "scripts", ylab = "inclusions",
-	    	  sub = paste0("rng seed: ", seed),
 	    	  ylim = c(0, ulim))
 		  graphics::abline(h = min_c, lty = 2, col = "orange")
 			graphics::abline(h = max_c, lty = 2, col = "orange")
