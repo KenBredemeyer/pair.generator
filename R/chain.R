@@ -1,7 +1,7 @@
 chain_once <- function(pairs, chain_length, times, n_performances) {
 	set.seed(1)
-	options(stringsAsFactors = FALSE)
-
+	stringsAsFactorsOption <- getOption("stringsAsFactors")
+  options(stringsAsFactors = FALSE)
 	pairs_copy <- data.frame(pairs[ , 1:2])
 	pairs_copy[ , 3] <- 1:dim(pairs)[1]
 	performance <- unique(unlist(pairs_copy[,1:2]))
@@ -55,5 +55,6 @@ chain <- function(pairs, chain_length = 4) {
 	}
 	chains_i <- unlist(chain_rows)
 	chain_number <- unlist(chain_n)
+	options(stringsAsFactors = stringsAsFactorsOption)
 	cbind(pairs[chains_i, ], chain_number)
 }
