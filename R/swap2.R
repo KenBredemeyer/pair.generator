@@ -52,8 +52,10 @@ swap2 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate 
 		}
 
 		# no repeated comparisons
-    sampled_pairs_i <- gp[ , 3]
-    combinations_unsampled <- combinations[-sampled_pairs_i, ]
+    sampled_pairs_i <- gp[ , "combination"]
+    sampled_rows <- match(sampled_pairs_i, combinations[ , 3])
+    combinations_unsampled <- combinations[-sampled_rows, ]
+
 		swap_in <- combinations_unsampled[combinations_unsampled[ , 1] == min_s.f.[1] |
 					combinations_unsampled[ , 2] == min_s.f.[1], ]
 
