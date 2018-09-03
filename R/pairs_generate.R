@@ -53,13 +53,13 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 
   pairs_i <- sample(dim(combinations)[1], pairs_length)  #! repeated pairs if pairs_length > dim(combinations)[1]  warn user of repeats
   gp <- combinations[pairs_i, ]
-
+  colnames(gp) <- c("left", "right", "combination")
   # generated pairs swapped
   gps <- swap2(gp = gp, combinations = combinations, av_inclusions = av_inclusions,
   	           inclusion_tolerance = inclusion_tolerance, animate = animate)
   options(stringsAsFactors = stringsAsFactorsOption)
   attr(gps, "initial_sampling") <- gp
-  colnames(gps) <- c("left", "right", "combination")
+
   gps
 }
 
@@ -130,6 +130,6 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 		}
 	}
   gp <- switch_lr(gp)
-  gp[ , c("left", "right", "chain_number")]
+  #gp[ , c("left", "right", "chain_number", "combination")]
 }
 
