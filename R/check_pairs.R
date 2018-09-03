@@ -35,12 +35,24 @@ any_judge_duplicates <- function(allocated_pairs) {
 	jdups <- lapply(judge_sets, duplicates)
 	n_duplicates <- lapply(jdups, nrow)
 
+	r_jdups <- lapply(judge_sets, reverse_duplicates)
+	no_reverse_dups <- is.null(unlist(r_jdups))
+
+	if (!no_reverse_dups) {
+    xdups_rev <- lapply(x, reverse_duplicates)
+		rows_revdups <- lapply(xdups_rev, nrow)
+		judges_with_rdups <- unname(which(unlist(rows_revdups) != 0))
+    message("Reverse duplicates found for the following judges: ")
+    cat(judges_with_rdups)
+	}
+
 	if (any(n_duplicates != 0)) {
 		judges_with_dups <- unname(which(unlist(n_duplicates) != 0))
 	  message("The following judges have more than one unique comparison: ")
 	  cat(judges_with_dups)
 	  message("\nUse duplicates() to find repeated comparisons")
-	} else if (all(n_duplicates == 0)) {
+	} else if (all(n_duplicates == 0) && no_reverse_dups) {
 		message("No repeated pairs for any judge")
 	}
 }
+
