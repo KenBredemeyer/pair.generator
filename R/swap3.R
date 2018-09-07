@@ -1,6 +1,20 @@
-#' swap pairs to improve inclusion range for performances
+#' Swap pairs to improve inclusion range for performances
+#' @param gp Data frame of left/right comparisons
+#' @param combinations Data frame containing \code{left} veriable in column 1
+#'   and \code{right} variable in column 2.  All possible pais of performances.
+#'   \code{combinations} can be created will \code{pairs_all}.
+#' @param av_inclusions Integer. Average number of times performances are to be
+#'   included in the set of generated pairs.
+#' @param inclusion_tolerance Integer.  Difference between the maximum or
+#'   minimnumber of times each performnace is included and the average
+#'   inclusions.
+#' @param animate Logical.  Should plots showing the current number of
+#'   inclusions for each performance be displayed.
+#' @param max_iterations Integer.  Maximum number of loops executed.
+#' @param allow_repeats Logical.  Should duplicate pairs be generated.
 #' @export
-swap3 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate = FALSE, max_iterations = 600) {
+swap3 <- function(gp, combinations, av_inclusions, inclusion_tolerance,
+	                animate = FALSE, max_iterations = 600, allow_repeats = FALSE) {
 
 	min_c <- av_inclusions - inclusion_tolerance
 	max_c <- av_inclusions + inclusion_tolerance
@@ -55,13 +69,18 @@ swap3 <- function(gp, combinations, av_inclusions, inclusion_tolerance, animate 
 			break
 		}
 
-		# no repeated comparisons
-    sampled_pairs_i <- gp[ , "combination"]
-    sampled_rows <- match(sampled_pairs_i, combinations[ , 3])
-    combinations_unsampled <- combinations[-sampled_rows, ]
+		if (!allow_repeats) {
+			# no repeated comparisons
+	    sampled_pairs_i <- gp[ , "combination"]
+	    sampled_rows <- match(sampled_pairs_i, combinations[ , 3])
+	    combinations_unsampled <- combinations[-sampled_rows, ]
 
-		swap_in <- combinations_unsampled[combinations_unsampled[ , 1] == min_s.f.[1] |
-					combinations_unsampled[ , 2] == min_s.f.[1], ]
+			swap_in <- combinations_unsampled[combinations_unsampled[ , 1] == min_s.f.[1] |
+						combinations_unsampled[ , 2] == min_s.f.[1], ]
+		} else if (allow_repeats) {
+			swap_in <- combinations[combinations[ , 1] == min_s.f.[1] |
+						combinations[ , 2] == min_s.f.[1], ]
+		}
 
 		if (nrow(swap_in) == 0) {
 			message("pairs generated, but could not meet specified inclusions")
