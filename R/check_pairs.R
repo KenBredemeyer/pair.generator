@@ -40,6 +40,7 @@ any_judge_duplicates <- function(allocated_pairs) {
 
 	if (!no_reverse_dups) {
     xdups_rev <- suppressMessages(lapply(x, reverse_duplicates))
+
 		rows_revdups <- lapply(xdups_rev, nrow)
 		judges_with_rdups <- unname(which(unlist(rows_revdups) != 0))
     message("Reverse duplicates found for the following judges: ")
