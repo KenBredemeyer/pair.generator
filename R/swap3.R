@@ -13,7 +13,7 @@
 #' @param max_iterations Integer.  Maximum number of loops executed.
 #' @param allow_repeats Logical.  Should duplicate pairs be generated.
 #' @export
-swap3 <- function(gp, combinations, av_inclusions, inclusion_tolerance,
+improve_inclusions <- function(gp, combinations, av_inclusions, inclusion_tolerance,
 	                animate = FALSE, max_iterations = 600, allow_repeats = FALSE) {
 
 	min_c <- av_inclusions - inclusion_tolerance
