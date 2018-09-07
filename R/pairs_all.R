@@ -37,6 +37,7 @@ pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
 	if(reps < 1)
 		stop("second argument must be at least 1")
 	combinations <- t(utils::combn(scripts, 2))
+	combinations <- cbind(combinations, 1:dim(combinations)[1])
 	if (is.numeric(separation_constraint)) {
 		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
   	combinations_scores <- data.frame(t(utils::combn(media$score, 2)), stringsAsFactors = FALSE)
@@ -50,7 +51,7 @@ pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
 	count <- dim(combinations)[1]
 	pairs <- do.call(rbind, pairs)
 	df_out <- cbind(pairs, rep(1:reps, each = count))
-	colnames(df_out) <- c("left", "right", "judge")
+	colnames(df_out) <- c("left", "right", "combination", "judge")
 	as.data.frame(df_out, stringsAsFactors = FALSE)
 }
 
