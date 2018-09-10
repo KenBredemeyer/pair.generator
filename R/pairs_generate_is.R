@@ -13,16 +13,11 @@
 #'   a data frame containing the variables \code{media, core, score}.
 #' @param av_inclusions Integer specifying the average number of times each
 #'   performance should be included in the generated pairs.
-#' @param inclusion_tolerance Integer specifying the difference between the
-#'   average number of incusions and the minimum or maximum number of
-#'   inclusions.
 #' @param separation_constraint Numeric.  Maximum absolute difference in scores
 #'   between performances in a pair.
-#' @param animate Logical.  Should plots be generated showing how inclusions of
-#'   performances are modified.
 #' @export
-pairs_generate_is <- function(media, av_inclusions, inclusion_tolerance,
-	                         separation_constraint = NULL, animate = FALSE) {
+pairs_generate_is <- function(media, av_inclusions,
+	                         separation_constraint = NULL) {
   stopifnot(av_inclusions %% 1 == 0)
 	if (is.numeric(separation_constraint)) {
 		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
