@@ -43,11 +43,14 @@ duplicates2 <- function(pairs) {
 	stopifnot(is.numeric(pairs$combination) && !any(is.na(pairs$combination)))
 
 	dups_i <- which(duplicated(pairs$combination) | duplicated(pairs$combination, fromLast = TRUE))
+  if (length(dups_i) > 0) {
+		duplicates_df <- cbind(pairs[dups_i, ], pairs_i = dups_i)
 
-	duplicates_df <- cbind(pairs[dups_i, ], pairs_i = dups_i)
-
-	duplicates_df <- duplicates_df[order(duplicates_df$combination), ]
-	duplicates_df <- transform(duplicates_df, freq= ave(seq(nrow(duplicates_df)), combination, FUN=length))
-  duplicates_df <- duplicates_df[order(-duplicates_df$freq), ]
-  duplicates_df
+		duplicates_df <- duplicates_df[order(duplicates_df$combination), ]
+		duplicates_df <- transform(duplicates_df, freq= ave(seq(nrow(duplicates_df)), combination, FUN=length))
+	  duplicates_df <- duplicates_df[order(-duplicates_df$freq), ]
+	  duplicates_df
+  } else {
+  	message("no duplicates")
+  }
 }
