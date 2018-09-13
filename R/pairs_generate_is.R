@@ -1,10 +1,14 @@
-#' Generate Pairs Initial Sampling
+#' Sample pairs from the set of all possible pairs
 #'
 #' Similar to \code{pairs_generate} but allows finer control.  All performances
-#' are inclusded in the set of generated pairs, but unlike \code{pairs_generate}
+#' are included in the set of generated pairs, but unlike \code{pairs_generate}
 #' no attempt is made to conform to a range of inclusions per performance.  Use
 #' with \code{improve_inclusions} to improve the range of inclusions of
 #' performances in the set of pairs.
+#'
+#' Combine \code{pairs_sample} in a workflow with \code{improve_inclusions},
+#' \code{chain} and \code{switch_lr} to acheive the same result as
+#' \code{pairs_generate}
 #'
 #' \code{improve_inclusions} optionally shows an animation of inclusions and
 #' optionally allows repeated pairs.
@@ -15,8 +19,10 @@
 #'   performance should be included in the generated pairs.
 #' @param separation_constraint Numeric.  Maximum absolute difference in scores
 #'   between performances in a pair.
+#' @seealso \code{\link{pairs_generate}}, \code{\link{improve_inclusions}},
+#'   \code{\link{chain}} and  \code{\link{switch_lr}}.
 #' @export
-pairs_generate_is <- function(media, av_inclusions,
+pairs_sample <- function(media, av_inclusions,
 	                         separation_constraint = NULL) {
   stopifnot(av_inclusions %% 1 == 0)
 	if (is.numeric(separation_constraint)) {
@@ -60,6 +66,6 @@ pairs_generate_is <- function(media, av_inclusions,
   colnames(gp) <- c("left", "right", "combination")
 
   options(stringsAsFactors = stringsAsFactorsOption)
-
+  rownames(gp) <- 1:dim(gp)[1]
   gp
 }
