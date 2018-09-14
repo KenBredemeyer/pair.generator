@@ -30,7 +30,7 @@ improve_inclusions <- function(gp, combinations, av_inclusions, inclusion_tolera
 
 	loop_index <- 1
 
-	while (length(above_max) > 0 | length(below_min) > 0 && loop_index < max_iterations) {
+	while ((length(above_max) > 0 | length(below_min) > 0) & loop_index < max_iterations) {
 		min_s.f. <- names(which(s.f. == min(s.f.)))
 		highs <- names(sort(s.f., decreasing = TRUE)[sort(s.f., decreasing = TRUE) >= max_c])
 
@@ -114,11 +114,12 @@ improve_inclusions <- function(gp, combinations, av_inclusions, inclusion_tolera
 			graphics::abline(h = max_c, lty = 2, col = "orange")
 		}
 
-		#if (loop_index %% 20 == 0) {
-		#	message(paste0("iteration number  ", loop_index))
-		#	print(pairs_inclusions_range(gp))
-		loop_index <- loop_index + 1
+		if (loop_index %% 20 == 0) {
+			message(paste0("iteration number  ", loop_index))
+			print(pairs_inclusions_range(gp))
 		}
-		gp
+	loop_index <- loop_index + 1
 	}
+	gp
+}
 
