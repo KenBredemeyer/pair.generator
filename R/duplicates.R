@@ -49,6 +49,7 @@ duplicates2 <- function(pairs) {
 		duplicates_df <- duplicates_df[order(duplicates_df$combination), ]
 		duplicates_df <- transform(duplicates_df, freq= ave(seq(nrow(duplicates_df)), combination, FUN=length))
 	  duplicates_df <- duplicates_df[order(-duplicates_df$freq), ]
+	  rownames(duplicates_df) <- 1:dim(duplicates_df)[1]
 	  duplicates_df
   } else {
   	message("no duplicates")
