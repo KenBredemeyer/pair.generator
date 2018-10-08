@@ -130,6 +130,7 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 		}
 	}
   gp <- switch_lr(gp)
-  #gp[ , c("left", "right", "chain_number", "combination")]
+  rownames(gp) <- 1:dim(gp)[1]
+  gp
 }
 
