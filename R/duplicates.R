@@ -2,8 +2,7 @@
 #'
 #' @param pairs data.frame returned from \code{pairs_make}.
 #' @return A data frame containing repeated pairs and their match.
-#' @export
-duplicates <- function(pairs) {
+duplicates_ <- function(pairs) {
 	dups <- pairs[which(duplicated(pairs[,1:2]) | duplicated(pairs[,1:2], fromLast = TRUE)), ]
 	dups <- dups[order(dups[ , 1], dups[ , 2]), ]
 	dups
@@ -38,8 +37,11 @@ reverse_duplicates <- function(gp) {
 
 #' Show all duplicates
 #'
+#' @param pairs A data frame containing pairs, for example, and object returned
+#'   from \code{pairs_generate}.
+#'
 #' @export
-duplicates2 <- function(pairs) {
+duplicates <- function(pairs) {
 	stopifnot(is.numeric(pairs$combination) && !any(is.na(pairs$combination)))
 
 	dups_i <- which(duplicated(pairs$combination) | duplicated(pairs$combination, fromLast = TRUE))
