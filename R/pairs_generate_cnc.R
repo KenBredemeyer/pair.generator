@@ -1,0 +1,89 @@
+pairs_make <- function(x, nc_include, chaining_constant = 4, separation_constraint = FALSE) {
+
+  stringsAsFactorsOption <- getOption("stringsAsFactors")
+  options(stringsAsFactors = FALSE)
+
+	# core scripts
+	scripts <- x[x[,2] == 1, c("media", "score")]
+
+	# non-core scripts
+	nc_scripts <- x[x[,2] == 0, c("media", "score")]
+
+	# for no separation constraint
+	if (!separation_constraint) {
+		# s1 is non-core sampling
+		s1 <- sampler(nc_scripts[ , "media"], nrow(nc_scripts) * nc_include)
+		# s2 for sampling of core scripts
+		s2 <- list()  # probably not the best way.
+		# nc_include must be less than the number of core scripts
+		for (i in 1:nrow(nc_scripts))
+			s2[[i]] <- sample(scripts[,"media"], nc_include)
+
+		cnc_gp <- data.frame(non_core = I(s1), core = unlist(s2)[order(order(s1))])
+	}
+
+	if (is.numeric(separation_constraint)) {
+		stopifnot(!any(is.na(scripts$score)), is.numeric(scripts$score))
+		# make list of all possible pairings between core and non core
+		cnc_combinations <- expand.grid(scripts[,1], nc_scripts[,1])
+		# include scores
+		cnc_scores <- expand.grid(scripts[,2], nc_scripts[,2])
+		cnc_combinations <- cbind(cnc_combinations, cnc_scores)
+		colnames(cnc_combinations) <- c("core_script", "non_core_script", "core_score", "non-core_score")
+
+		# apply separation constraint to `cnc_combinations`
+		cnc_combinations <- cbind(cnc_combinations, abs(cnc_combinations[,3] - cnc_combinations[,4]))
+		colnames(cnc_combinations)[5] <- "diff"
+
+		cnc_combinations <- cnc_combinations[cnc_combinations[,"diff"] <= separation_constraint, ]
+
+		# for each nc_script (unique), sample `nc_include` core scripts from cnc_combinations.
+		nonCore <- factor(cnc_combinations$non_core_script)
+
+		paired_cores <- tapply(cnc_combinations$core_script, nonCore, function(x) sample(x, nc_include))
+		cnc_gp <- data.frame(non_core = rep(unique(as.character(nonCore)), each = nc_include), core = as.character(unname(unlist(paired_cores))))
+	}
+
+	## apply chaining
+	reps <- floor(nc_include / chaining_constant)
+	rem <- nc_include %% chaining_constant
+
+	index <- list()
+	for (i in 1:length(nc_scripts[,"media"]))
+		index[[i]] <- which(cnc_gp == unique(cnc_gp[,"non_core"])[i])
+
+	thing <- list()
+	index_vector <- list()
+	for (j in 1:reps) {
+		for (i in 1:length(index)) {
+			thing[[i]] <- index[[i]][(chaining_constant*(j-1)+1):(j*chaining_constant)] }
+		index_vector[[j]] <- do.call(c, thing)
+	}
+
+	# elements which cannot be chained completely
+	if (rem != 0) {
+		for (i in 1:length(index)) {
+			thing[[i]] <- index[[i]][(j*chaining_constant+1):(j*chaining_constant+rem)]
+		}
+		index_vector[[j+1]] <- do.call(c, thing)
+	}
+
+	index_vector <- do.call(c, index_vector)
+
+	cnc_gp <- cnc_gp[index_vector, ]
+
+	# calculate chain number
+	non_core_count <- length(unique(cnc_gp[,"non_core"]))
+	chain_number <- c(rep(1 : (non_core_count * reps), each = chaining_constant),
+              			rep((1 + (non_core_count * reps)) : (non_core_count + (non_core_count * reps)), each = rem))
+
+	# randomize left/right presentation
+	cnc_gp <- switch_lr(cnc_gp)
+	colnames(cnc_gp) <- c("left", "right")
+
+	# add chain number
+	cnc_gp <- cbind(cnc_gp, chain_number)
+
+	options(stringsAsFactors = stringsAsFactorsOption)
+	return(cnc_gp)
+}
