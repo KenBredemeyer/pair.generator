@@ -1,4 +1,26 @@
-pairs_make <- function(x, nc_include, chaining_constant = 4, separation_constraint = FALSE) {
+#' Pair non-core performances with core performances
+#'
+#' This type of pair generation is for placing new performances on an existing
+#' scale.  "Core" performances should have location estimates, and "non-core"
+#' performances are to be placed on the scale formed using the "core"
+#' performances.
+#'
+#' @param media A data frame containing the variables: \code{media}, a character
+#'   vector of performance labels; \code{core}, a numeric vector, whether core
+#'   (\code{0}) or non-core (\code{1}).
+#'
+#' @param nc_include Integer.  The number of core performances to pair with each
+#'   non-core performance.
+#'
+#' @param chaining_constant Integer.  The number of successive pairs to contain
+#'   a common performance (used to increase the efficiency of judging).
+#'
+#' @param separation_constraint Numeric, or \code{FALSE} for no separation
+#'   constraint.  The maximum absolute difference between performance scores in
+#'   a pair.
+#'
+#' @export
+pairs_generate_cnc <- function(media, nc_include, chaining_constant = 4, separation_constraint = FALSE) {
 
   stringsAsFactorsOption <- getOption("stringsAsFactors")
   options(stringsAsFactors = FALSE)
