@@ -10,10 +10,8 @@
 #'   inclusions.
 #' @param separation_constraint Numeric.  Maximum absolute difference in scores
 #'   between performances in a pair.
-#' @param animate Logical.  Should plots be generated showing how inclusions of
-#'   performances are modified.
 pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
-	                         separation_constraint = NULL, animate = FALSE) {
+	                         separation_constraint = NULL) {
   stopifnot(av_inclusions %% 1 == 0)
 	if (is.numeric(separation_constraint)) {
 		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
@@ -56,7 +54,7 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
   colnames(gp) <- c("left", "right", "combination")
   # generated pairs swapped
   gps <- swap2(gp = gp, combinations = combinations, av_inclusions = av_inclusions,
-  	           inclusion_tolerance = inclusion_tolerance, animate = animate)
+  	           inclusion_tolerance = inclusion_tolerance)
   options(stringsAsFactors = stringsAsFactorsOption)
   attr(gps, "initial_sampling") <- gp
 
@@ -80,9 +78,6 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 #'   between media/performances in a pair.
 #' @param chain_length Integer. How many successive comparisons should share a
 #'   common performance.  Used for efficiency of judging.
-#' @param animate Logical or numeric. If logical, should inclusion plots be
-#'   produced? If numeric, the delay between frames is seconds via
-#'   \code{Sys.sleep}
 #'
 #' @return A data frame containing the variables \code{left, right,
 #'   chain_number}.  \code{left} is the name of the performance to be presented
@@ -91,7 +86,7 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 #'   of judging.
 #' @export
 pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
-	separation_constraint = NULL, chain_length, animate = FALSE) {
+	separation_constraint = NULL, chain_length) {
 	# media can be vector or data.frame
 	if (!is.null(dim(media))) {
     n_scripts <- dim(media)[1]
@@ -101,8 +96,7 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 	n_exhaustive_pairs <- n_scripts * (n_scripts - 1) / 2
 	if(av_inclusions <= n_scripts - 1) {
 		gp <- pairs_generate_(media = media, av_inclusions = av_inclusions,
-			     inclusion_tolerance = inclusion_tolerance, separation_constraint = separation_constraint,
-			     animate = FALSE)
+			     inclusion_tolerance = inclusion_tolerance, separation_constraint = separation_constraint)
 		gp <- chain(gp, chain_length = chain_length)
 	} else if(av_inclusions > n_scripts - 1) {
 		reps <- av_inclusions %/% (n_scripts - 1)
@@ -110,7 +104,7 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 		# generate remaining pairs
 		if (rem != 0) {
 		gpr <- pairs_generate_(media, av_inclusions = rem, inclusion_tolerance = inclusion_tolerance,
-			                    separation_constraint = separation_constraint, animate = FALSE)
+			                    separation_constraint = separation_constraint)
 		gpr <- chain(gpr, chain_length = chain_length)
 
 		# generated pairs exhaustive
