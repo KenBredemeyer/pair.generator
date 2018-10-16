@@ -1,6 +1,6 @@
-#' Example data
+#' Example data set
 #'
-#' Use with \code{pairs_make(... , type = "standard_pairs")}. All media are 'core'.
+#' Use with \code{pairs_generate}. All media are 'core'.
 #' Used in projects where a new scale is to be created.
 #'
 #' @docType data
@@ -19,9 +19,9 @@
 "data_standard"
 
 
-#' Example data
+#' Example data for core versus non-core pair generation
 #'
-#' Use with \code{pairs_make(... , type = "core_noncore")}.
+#' Use with \code{pairs_generate_cnc}.
 #' Used in projects where non-core items are to be located on a pre determined
 #' scale of the core items.
 #'
