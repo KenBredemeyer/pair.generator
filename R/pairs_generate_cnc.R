@@ -12,7 +12,7 @@
 #' @param nc_include Integer.  The number of core performances to pair with each
 #'   non-core performance.
 #'
-#' @param chaining_constant Integer.  The number of successive pairs to contain
+#' @param chain_length Integer.  The number of successive pairs to contain
 #'   a common performance (used to increase the efficiency of judging).
 #'
 #' @param separation_constraint Numeric, or \code{FALSE} for no separation
@@ -20,16 +20,16 @@
 #'   a pair.
 #'
 #' @export
-pairs_generate_cnc <- function(media, nc_include, chaining_constant = 4, separation_constraint = FALSE) {
+pairs_generate_cnc <- function(media, nc_include, chain_length = 4, separation_constraint = FALSE) {
 
   stringsAsFactorsOption <- getOption("stringsAsFactors")
   options(stringsAsFactors = FALSE)
 
 	# core scripts
-	scripts <- x[x[,2] == 1, c("media", "score")]
+	scripts <- media[media[,2] == 1, c("media", "score")]
 
 	# non-core scripts
-	nc_scripts <- x[x[,2] == 0, c("media", "score")]
+	nc_scripts <- media[media[,2] == 0, c("media", "score")]
 
 	# for no separation constraint
 	if (!separation_constraint) {
@@ -67,8 +67,8 @@ pairs_generate_cnc <- function(media, nc_include, chaining_constant = 4, separat
 	}
 
 	## apply chaining
-	reps <- floor(nc_include / chaining_constant)
-	rem <- nc_include %% chaining_constant
+	reps <- floor(nc_include / chain_length)
+	rem <- nc_include %% chain_length
 
 	index <- list()
 	for (i in 1:length(nc_scripts[,"media"]))
@@ -78,14 +78,14 @@ pairs_generate_cnc <- function(media, nc_include, chaining_constant = 4, separat
 	index_vector <- list()
 	for (j in 1:reps) {
 		for (i in 1:length(index)) {
-			thing[[i]] <- index[[i]][(chaining_constant*(j-1)+1):(j*chaining_constant)] }
+			thing[[i]] <- index[[i]][(chain_length*(j-1)+1):(j*chain_length)] }
 		index_vector[[j]] <- do.call(c, thing)
 	}
 
 	# elements which cannot be chained completely
 	if (rem != 0) {
 		for (i in 1:length(index)) {
-			thing[[i]] <- index[[i]][(j*chaining_constant+1):(j*chaining_constant+rem)]
+			thing[[i]] <- index[[i]][(j*chain_length+1):(j*chain_length+rem)]
 		}
 		index_vector[[j+1]] <- do.call(c, thing)
 	}
@@ -96,7 +96,7 @@ pairs_generate_cnc <- function(media, nc_include, chaining_constant = 4, separat
 
 	# calculate chain number
 	non_core_count <- length(unique(cnc_gp[,"non_core"]))
-	chain_number <- c(rep(1 : (non_core_count * reps), each = chaining_constant),
+	chain_number <- c(rep(1 : (non_core_count * reps), each = chain_length),
               			rep((1 + (non_core_count * reps)) : (non_core_count + (non_core_count * reps)), each = rem))
 
 	# randomize left/right presentation
@@ -106,6 +106,7 @@ pairs_generate_cnc <- function(media, nc_include, chaining_constant = 4, separat
 	# add chain number
 	cnc_gp <- cbind(cnc_gp, chain_number)
 
+  row.names(cnc_gp) <- 1:dim(cnc_gp)[1]
 	options(stringsAsFactors = stringsAsFactorsOption)
 	return(cnc_gp)
 }
