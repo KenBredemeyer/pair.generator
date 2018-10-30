@@ -5,7 +5,14 @@
 #' @param judges Single integer specifying the number of judges to allocate
 #'   pairs evenly to, or a vector of integers specifying the number of pairs to
 #'   allocate to each judge.
-#' @return data frame with pairs and judge number.
+#' @return The input data frame with a new column \code{judge} added.
+#' @examples
+#' gp <- pairs_generate(letters,
+#'	                   av_inclusions = 10,
+#'	                   inclusion_tolerance = 1,
+#'	                   chain_length = 1)
+#' allocated_pairs <- allocate(gp, judges = 5)
+#'
 #' @export
 allocate <- function(pairs, judges) {
 	# allocate pairs_each (equal pairs for each judge)
@@ -22,9 +29,8 @@ allocate <- function(pairs, judges) {
 
 
 
-#' Allocate pairs to judges, preventing judge duplicates
-#'
-#' @export
+# Allocate pairs to judges, preventing judge duplicates
+#  test before exporting @export
 allocate2 <- function(pairs, n_judges) {
 	## what if uneven allocations to judges??
 	stopifnot()

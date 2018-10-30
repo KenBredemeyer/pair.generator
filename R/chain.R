@@ -33,9 +33,23 @@ chain_once <- function(pairs, chain_length, times, n_performances) {
 
 
 
-#' chain pairs
-#' @param pairs data.frame containing pairs in columns 1 and 2
-#' @param chain_length Integer.
+#' Chain pairs
+#'
+#' Re-orders rows of a data frame containing \code{left} and \code{right} pairs,
+#' so that a common performance (or cell value) is included in consecutive
+#' pairs.
+#'
+#' @param pairs data.frame containing pairs in columns 1 and 2, such as that
+#'   returned from \code{pairs_generate}.
+#' @param chain_length Integer, specifying how many consecutive pairs of
+#'   performances/media are to have a common performance.
+#'
+#' @examples
+#' sampled_pairs <- pairs_sample(letters, av_inclusions = 5)
+#' chained_pairs <- chain(sampled_pairs, chain_length = 4)
+#'
+#' @seealso \code{\link{switch_lr}}
+#'
 #' @export
 chain <- function(pairs, chain_length = 4) {
 	labels <- unique(unlist(pairs[ , 1:2]))
