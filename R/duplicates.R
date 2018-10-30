@@ -43,10 +43,12 @@ reverse_duplicates <- function(gp) {
 #' @param pairs A data frame containing pairs, for example, and object returned
 #'   from \code{pairs_generate}.  This data frame must include the
 #'   \code{combinations} variable.
+#' @param message Logical.  Should a message be returned if there are no
+#'   repeated pairs.
 #'
 #' @return A data frame showing which pairs are repeated, if any, or \code{NULL}
-#'   if there are no repeated pairs.  A message is also returned if there are no
-#'   repeated pairs.
+#'   if there are no repeated pairs.  A message is also optionally returned if
+#'   there are no repeated pairs.
 #'
 #' @examples
 #' # check if there are any duplicates in a set of pairs
@@ -62,7 +64,7 @@ reverse_duplicates <- function(gp) {
 #' judge_duplicates <- lapply(judge_sets, duplicates)
 #'
 #' @export
-duplicates <- function(pairs) {
+duplicates <- function(pairs, message = TRUE) {
 	stopifnot(is.numeric(pairs$combination) && !any(is.na(pairs$combination)))
 
 	dups_i <- which(duplicated(pairs$combination) | duplicated(pairs$combination, fromLast = TRUE))
@@ -74,7 +76,7 @@ duplicates <- function(pairs) {
 	  duplicates_df <- duplicates_df[order(-duplicates_df$freq), ]
 	  rownames(duplicates_df) <- 1:dim(duplicates_df)[1]
 	  duplicates_df
-  } else {
+  } else if(message) {
   	message("no duplicates")
   }
 }
