@@ -35,10 +35,31 @@ reverse_duplicates <- function(gp) {
 	}
 }
 
-#' Show all duplicates
+#' Show all duplicates in a set of pairs.
+#'
+#' Use this function on objects returned from \code{pairs_generate}, or similar
+#' functions, to check if there will be repeated comparisons for judges.
 #'
 #' @param pairs A data frame containing pairs, for example, and object returned
-#'   from \code{pairs_generate}.
+#'   from \code{pairs_generate}.  This data frame must include the
+#'   \code{combinations} variable.
+#'
+#' @return A data frame showing which pairs are repeated, if any, or \code{NULL}
+#'   if there are no repeated pairs.  A message is also returned if there are no
+#'   repeated pairs.
+#'
+#' @examples
+#' # check if there are any duplicates in a set of pairs
+#' gp <- pairs_generate(data_standard,
+#'                      av_inclusions = 10,
+#'                      inclusion_tolerance = 2,
+#'                      chain_length = 1)
+#' duplicates(gp)
+#'
+#' # check if there are any duplicates for the judges
+#' allocated_pairs <- allocate(gp, judges = 5)
+#' judge_sets <- split(allocated_pairs, f = as.factor(allocated_pairs$judge))
+#' judge_duplicates <- lapply(judge_sets, duplicates)
 #'
 #' @export
 duplicates <- function(pairs) {
