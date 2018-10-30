@@ -1,4 +1,11 @@
-#' Swap pairs to improve inclusion range for performances
+#' Modify a data frame of pairs to improve the inclusion range of performances
+#'
+#' \code{improve_inclusions} swaps pairs between the set of generated pairs
+#' (\code{gp}) in the first argument with pairs in the set of all pairs
+#' (\code{combinations}) in the second argument.  It does this in an iterative
+#' fashion, trying to conform to the specified inclusion range.  Use this
+#' function if \code{pairs_generate} is not able to return a data frame, or is
+#' taking excessively long.
 #' @param gp Data frame of left/right comparisons
 #' @param combinations Data frame containing \code{left} veriable in column 1
 #'   and \code{right} variable in column 2.  All possible pais of performances.
@@ -12,6 +19,24 @@
 #'   inclusions for each performance be displayed.
 #' @param max_iterations Integer.  Maximum number of loops executed.
 #' @param allow_repeats Logical.  Should duplicate pairs be generated.
+#'
+#' @return A data frame in the same form as \code{gp}, its first argument, but
+#'   modified to meet speicified inclusions of performances.  Messages
+#'   indicating the iteration number, and the range of inclusions at the
+#'   corresponding iteration are output to the console.  An inclusion plots
+#'   updated at every iteration is optionally displayed with the \code{animate}
+#'   argument.
+#' @examples
+#' set.seed(1)
+#' sampled_pairs <- pairs_sample(letters, av_inclusions = 10)
+#' pairs <- improve_inclusions(sampled_pairs,
+#'                             combinations = pairs_all(letters)[ , 1:3],
+#'                             av_inclusions = 10,
+#'                             inclusion_tolerance = 1)
+#' pairs_inclusions_range(pairs)
+#'
+#' @seealso \code{\link{pairs_sample}}, \code{\link{chain}},
+#'   \code{\link{switch_lr}}
 #' @export
 improve_inclusions <- function(gp, combinations, av_inclusions, inclusion_tolerance,
 	                animate = FALSE, max_iterations = 600, allow_repeats = FALSE) {
@@ -120,6 +145,7 @@ improve_inclusions <- function(gp, combinations, av_inclusions, inclusion_tolera
 		}
 	loop_index <- loop_index + 1
 	}
+	gp$combination <- as.numeric(gp$combination)
 	gp
 }
 

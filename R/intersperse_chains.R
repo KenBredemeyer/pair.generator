@@ -1,8 +1,11 @@
-#' intersperse incomplete chains with full chains
+#' Intersperse incomplete chains with full chains.  Use this function if it is
+#' desirable to avoid incomplete chains being allocated unevenly among judges.
 #'
 #' @param pairs data.frame containing chained pairs, returned from \code{chain}.
 #' @param chain_length Integer specifying the number of consecutive pairs to
 #'   include a common performance.
+#' @seealso \code{\link{pairs_generate}}, \code{\link{chain}},
+#'   \code{\link{allocate}}
 #' @export
 intersperse_chains <- function(pairs, chain_length) {
   rles <- rle(pairs$chain_number)
