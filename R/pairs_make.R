@@ -1,7 +1,9 @@
 #' Generate Pairs
 #'
 #' Pair performances or media items for constructing a pairwise comparison
-#' design.
+#' design.  Soft deprecated - use \code{pairs_generate} instead for standard
+#' pairs, or \code{pairs_generate_cnc} for core versus non-core pair generation,
+#' unless complete chains only are needed.
 #'
 #' @param x A data.frame containing 3 variables named "media", "core", "score".
 #'   Variable types must be "character", "numeric", "numeric".
