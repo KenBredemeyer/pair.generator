@@ -1,15 +1,15 @@
-#' Form pairs from scripts
-#'
-#' no duplicates.  function used in pairs_generate
-#' @param media Character vector representing the names of the performances, or
-#'   a data frame containing the variables \code{media, core, score}.
-#' @param av_inclusions Integer specifying the average number of times each
-#'   performance should be included in the generated pairs.
-#' @param inclusion_tolerance Integer specifying the difference between the
-#'   average number of incusions and the minimum or maximum number of
-#'   inclusions.
-#' @param separation_constraint Numeric.  Maximum absolute difference in scores
-#'   between performances in a pair.
+# Form pairs from scripts
+#
+# no duplicates.  function used in pairs_generate
+# @param media Character vector representing the names of the performances, or
+#   a data frame containing the variables \code{media, core, score}.
+# @param av_inclusions Integer specifying the average number of times each
+#   performance should be included in the generated pairs.
+# @param inclusion_tolerance Integer specifying the difference between the
+#   average number of incusions and the minimum or maximum number of
+#   inclusions.
+# @param separation_constraint Numeric.  Maximum absolute difference in scores
+#   between performances in a pair.
 pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 	                         separation_constraint = NULL) {
   stopifnot(av_inclusions %% 1 == 0)
