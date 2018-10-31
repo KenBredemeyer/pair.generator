@@ -1,9 +1,21 @@
 #' Intersperse incomplete chains with full chains.  Use this function if it is
 #' desirable to avoid incomplete chains being allocated unevenly among judges.
 #'
+#' Here, *chaining* refers to consecutive pairs having a common performance or
+#' item.  Chain length is the specified number of consecutive pairs which
+#' contain a common item or performance, and is specified as an argument to the
+#' \code{pairs_generate} and \code{chain} functions.  Complete chains are where
+#' the number of consecutive pairs which have a common performance is equal to
+#' that specified, and incomplete chains have a performance common to a number
+#' of consecutive pairs which is less than \code{chain_length}.
+#'
 #' @param pairs data.frame containing chained pairs, returned from \code{chain}.
 #' @param chain_length Integer specifying the number of consecutive pairs to
 #'   include a common performance.
+#'
+#' @return A data frame which is the same as first argument of
+#'   \code{intersperse_chains}, but with re-ordered rows.
+#'
 #' @seealso \code{\link{pairs_generate}}, \code{\link{chain}},
 #'   \code{\link{allocate}}
 #' @export
