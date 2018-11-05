@@ -63,28 +63,34 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 
 
 
-#' Form pairs of performances for pairwise comparisons
+#'Form pairs of performances for pairwise comparisons
 #'
-#' Standard pairs generation.
+#'Standard pairs generation.
 #'
-#' @param media Character vector of media or performance labels, or a data.frame
-#'   containing "media", "core", and "score" variables.
-#' @param av_inclusions Integer specifying the average number of inclusions per
-#'   media or performance.
-#' @param inclusion_tolerance Integer. What should the difference between
-#'   average inclusions and minimum inclusions, or between maximum inclusions
-#'   and average inclusions be.
-#' @param separation_constraint Numeric. The maximum absolute score difference
-#'   between media/performances in a pair.
-#' @param chain_length Integer. How many successive comparisons should share a
-#'   common performance.  Used for efficiency of judging.
+#'@param media Character vector of media or performance labels, or a data.frame
+#'  containing "media", "core", and "score" variables.
+#'@param av_inclusions Integer specifying the average number of inclusions per
+#'  media or performance.
+#'@param inclusion_tolerance Integer. What should the difference between average
+#'  inclusions and minimum inclusions, or between maximum inclusions and average
+#'  inclusions be.
+#'@param separation_constraint Numeric. The maximum absolute score difference
+#'  between media/performances in a pair.
+#'@param chain_length Integer. How many successive comparisons should share a
+#'  common performance.  Used for efficiency of judging.
 #'
-#' @return A data frame containing the variables \code{left, right,
-#'   chain_number}.  \code{left} is the name of the performance to be presented
-#'   on the left side for judging.  \code{chain_number} indicates how
-#'   consecutive comparisons use common performances to increase the efficiency
-#'   of judging.
-#' @export
+#'@return A data frame containing the variables \code{left, right,
+#'  chain_number}.  \code{left} is the name of the performance to be presented
+#'  on the left side for judging.  \code{chain_number} indicates how consecutive
+#'  comparisons use common performances to increase the efficiency of judging.
+#'
+#' @examples
+#' pairs_generate(letters[1:3],
+#'	               av_inclusions = 2,
+#'	               inclusion_tolerance = 1,
+#'	               chain_length = 1)
+#'
+#'@export
 pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 	separation_constraint = NULL, chain_length) {
 	# media can be vector or data.frame
