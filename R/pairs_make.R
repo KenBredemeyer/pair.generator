@@ -1,7 +1,7 @@
 #' Generate Pairs
 #'
 #' Pair performances or media items for constructing a pairwise comparison
-#' design.  Soft deprecated - use \code{pairs_generate} instead for standard
+#' design.  \strong{Soft deprecated} - use \code{pairs_generate} instead for standard
 #' pairs, or \code{pairs_generate_cnc} for core versus non-core pair generation,
 #' unless complete chains only are needed.
 #'
@@ -26,6 +26,7 @@
 #'   the pair. "combination" is the row number corresponding to a data frame
 #'   containing all possiblge pairs, used for checks. For importing into an
 #'   interface for judging, use only "left", "right" and "chain_number".
+#' @seealso \code{\link{pairs_generate}}, \code{\link{pairs_generate_cnc}}
 #' @export
 pairs_make <- function(x, type = "standard_pairs", chaining_constant = 4, separation_constraint = FALSE,
 	                         nc_include = NA, min_c = 10, max_c = 20) {
