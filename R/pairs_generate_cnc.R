@@ -12,12 +12,19 @@
 #' @param nc_include Integer.  The number of core performances to pair with each
 #'   non-core performance.
 #'
-#' @param chain_length Integer.  The number of successive pairs to contain
-#'   a common performance (used to increase the efficiency of judging).
+#' @param chain_length Integer.  The number of successive pairs to contain a
+#'   common performance (used to increase the efficiency of judging).
 #'
 #' @param separation_constraint Numeric, or \code{FALSE} for no separation
 #'   constraint.  The maximum absolute difference between performance scores in
 #'   a pair.
+#'
+#' @return A data frame containing the variables \code{left}, \code{right}, and
+#'   \code{chain_number}.  Each \code{left, right} pair will contain one "core"
+#'   and one "non-core" performance.
+#'
+#' @examples
+#' pairs_generate_cnc(data_cnc[1:4, ], nc_include = 1, chain_length = 1)
 #'
 #' @export
 pairs_generate_cnc <- function(media, nc_include, chain_length = 4, separation_constraint = FALSE) {
