@@ -21,6 +21,8 @@
 #'   between performances in a pair.
 #' @seealso \code{\link{pairs_generate}}, \code{\link{improve_inclusions}},
 #'   \code{\link{chain}} and  \code{\link{switch_lr}}.
+#' @examples
+#' pairs_sample(letters[1:5], av_inclusions = 2)
 #' @export
 pairs_sample <- function(media, av_inclusions,
 	                         separation_constraint = NULL) {
