@@ -12,12 +12,15 @@ sampler <- function(scripts, s1_size) {
   } else s1 <- sample(scripts, s1_size, replace = FALSE)
 }
 
-#' randomize left/right presentation
+#' Randomize left/right presentation
 #'
 #' This function switches the value of the column 1 with the value of column 2,
 #' for random row numbers.
 #'
-#' @param x data frame containing paired performances in cols 1 and 2.
+#' @param x data frame containing paired performances in columns 1 and 2.
+#' @examples
+#' pairs <- data.frame(left = letters[1:4], right = 1:4, stringsAsFactors = FALSE)
+#' switch_lr(pairs)
 #' @export
 switch_lr <- function(x) {
   switch_index <- sort(sample(1:nrow(x), nrow(x) / 2))
@@ -25,4 +28,5 @@ switch_lr <- function(x) {
   temp_copy[switch_index, 1] <- x[switch_index, 2]
   temp_copy[switch_index, 2] <- x[switch_index, 1]
   x <- temp_copy
+  x
 }
