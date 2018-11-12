@@ -1,5 +1,7 @@
-# function ----------------------------------------------------------------
 #' simulate judgements of pairwise comparisons
+#'
+#' \code{sim_judge} is intended for investigating model properties at the
+#' estimation stage, for research purposes.
 #'
 #' @param performances Character vector of media or performance labels.
 #' @param pairs data.frame returned from \code{pairs_generate}.
@@ -7,8 +9,8 @@
 #' @param min Numeric. Minimum value for the uniform distribution.
 #' @param max Numeric. Maximum value for the uniform distribution.
 #' @param mean Numeric.  Mean of the normal distribution.
-#' @param sd Numeric.  Standard deviation for the normal distribution.
-#'   or \code{mead, sd} for \code{rnorm}.
+#' @param sd Numeric.  Standard deviation for the normal distribution. or
+#'   \code{mead, sd} for \code{rnorm}.
 #' @export
 sim_judge <- function(performances, pairs, distribution = "uniform", min, max, mean, sd) {
   stopifnot(any(distribution == c("uniform", "random")))
