@@ -3,7 +3,7 @@
 \docType{data}
 \name{data_standard}
 \alias{data_standard}
-\title{Example data}
+\title{Example data set}
 \format{A data frame with 3 variables. Column headers are 'media', 'core'
   & 'score'.
 \describe{
@@ -17,7 +17,7 @@
 data(data_standard)
 }
 \description{
-Use with \code{pairs_make(... , type = "standard_pairs")}. All media are 'core'.
+Use with \code{pairs_generate}. All media are 'core'.
 Used in projects where a new scale is to be created.
 }
 \keyword{datasets}

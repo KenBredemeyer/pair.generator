@@ -3,7 +3,7 @@
 \docType{data}
 \name{data_cnc}
 \alias{data_cnc}
-\title{Example data}
+\title{Example data for core versus non-core pair generation}
 \format{A data frame with 3 variables. Column headers are \code{media, core, score}
 \describe{
   \item{media}{the label of the performance or media
@@ -16,7 +16,7 @@
 data(data_cnc)
 }
 \description{
-Use with \code{pairs_make(... , type = "core_noncore")}.
+Use with \code{pairs_generate_cnc}.
 Used in projects where non-core items are to be located on a pre determined
 scale of the core items.
 }

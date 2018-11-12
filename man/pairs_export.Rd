@@ -16,5 +16,5 @@ pairs_export(gp, file)
 writes to file using \code{write.csv}.
 }
 \seealso{
-\code{\link{pairs_make}}
+\code{\link{pairs_generate}}
 }

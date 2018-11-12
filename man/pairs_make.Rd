@@ -6,7 +6,7 @@
 \usage{
 pairs_make(x, type = "standard_pairs", chaining_constant = 4,
   separation_constraint = FALSE, nc_include = NA, min_c = 10,
-  max_c = 20, seed = 1)
+  max_c = 20)
 }
 \arguments{
 \item{x}{A data.frame containing 3 variables named "media", "core", "score".
@@ -32,8 +32,6 @@ and \code{max_c} are relevant for \code{type = "standard_pairs"} only.}
 
 \item{max_c}{Integer. The maximum number of times a performance should be
 included.}
-
-\item{seed}{Integer. rng seed.}
 }
 \value{
 A data frame with paired performances, where "left" and "right" form
@@ -43,5 +41,10 @@ A data frame with paired performances, where "left" and "right" form
 }
 \description{
 Pair performances or media items for constructing a pairwise comparison
-design.
+design.  \strong{Soft deprecated} - use \code{pairs_generate} instead for standard
+pairs, or \code{pairs_generate_cnc} for core versus non-core pair generation,
+unless complete chains only are needed.
+}
+\seealso{
+\code{\link{pairs_generate}}, \code{\link{pairs_generate_cnc}}
 }

@@ -2,16 +2,38 @@
 % Please edit documentation in R/duplicates.R
 \name{duplicates}
 \alias{duplicates}
-\title{Find Repeated Pairs}
+\title{Show all duplicates in a set of pairs.}
 \usage{
-duplicates(pairs)
+duplicates(pairs, message = TRUE)
 }
 \arguments{
-\item{pairs}{data.frame returned from \code{pairs_make}.}
+\item{pairs}{A data frame containing pairs, for example, and object returned
+from \code{pairs_generate}.  This data frame must include the
+\code{combinations} variable.}
+
+\item{message}{Logical.  Should a message be returned if there are no
+repeated pairs.}
 }
 \value{
-A data frame containing repeated pairs and their match.
+A data frame showing which pairs are repeated, if any, or \code{NULL}
+  if there are no repeated pairs.  A message is also optionally returned if
+  there are no repeated pairs.
 }
 \description{
-Find Repeated Pairs
+Use this function on objects returned from \code{pairs_generate}, or similar
+functions, to check if there are repeated comparisons for judges.
+}
+\examples{
+# check if there are any duplicates in a set of pairs
+gp <- pairs_generate(data_standard,
+                     av_inclusions = 10,
+                     inclusion_tolerance = 2,
+                     chain_length = 1)
+duplicates(gp)
+
+# check if there are any duplicates for the judges
+allocated_pairs <- allocate(gp, judges = 5)
+judge_sets <- split(allocated_pairs, f = as.factor(allocated_pairs$judge))
+judge_duplicates <- lapply(judge_sets, duplicates)
+
 }

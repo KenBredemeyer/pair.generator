@@ -5,8 +5,7 @@
 \title{Form pairs of performances for pairwise comparisons}
 \usage{
 pairs_generate(media, av_inclusions, inclusion_tolerance,
-  separation_constraint = NULL, chain_length, seed = 1,
-  animate = FALSE)
+  separation_constraint = NULL, chain_length)
 }
 \arguments{
 \item{media}{Character vector of media or performance labels, or a data.frame
@@ -15,29 +14,29 @@ containing "media", "core", and "score" variables.}
 \item{av_inclusions}{Integer specifying the average number of inclusions per
 media or performance.}
 
-\item{inclusion_tolerance}{Integer. What should the difference between
-average inclusions and minimum inclusions, or between maximum inclusions
-and average inclusions be.}
+\item{inclusion_tolerance}{Integer. What should the difference between average
+inclusions and minimum inclusions, or between maximum inclusions and average
+inclusions be.}
 
 \item{separation_constraint}{Numeric. The maximum absolute score difference
 between media/performances in a pair.}
 
 \item{chain_length}{Integer. How many successive comparisons should share a
 common performance.  Used for efficiency of judging.}
-
-\item{seed}{Integer. Random number seed parsed to \code{set.seed}}
-
-\item{animate}{Logical or numeric. If logical, should inclusion plots be
-produced? If numeric, the delay between frames is seconds via
-\code{Sys.sleep}}
 }
 \value{
 A data frame containing the variables \code{left, right,
-  chain_number}.  \code{left} is the name of the performance to be presented
-  on the left side for judging.  \code{chain_number} indicates how
-  consecutive comparisons use common performances to increase the efficiency
-  of judging.
+ chain_number}.  \code{left} is the name of the performance to be presented
+ on the left side for judging.  \code{chain_number} indicates how consecutive
+ comparisons use common performances to increase the efficiency of judging.
 }
 \description{
 Standard pairs generation.
+}
+\examples{
+pairs_generate(letters[1:3],
+               av_inclusions = 2,
+               inclusion_tolerance = 1,
+               chain_length = 1)
+
 }

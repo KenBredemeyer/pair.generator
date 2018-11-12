@@ -27,9 +27,10 @@ A data frame containing columns "left", "right" and "judge". If
 \code{all_pairs} generates all unique pairs for pairwise comparisons.
 }
 \details{
-Exhaustive pairs (each media item paired with all others) can be created for
-using any number of judges.  Each judge will view all pairs. Allocate
-n*(n-1)/2 pairs to each judge.
+Exhaustive pairs (each media item, or performance, paired with all others)
+can be created for  any number of judges.  Each judge will view all
+pairs. Allocate n.(n-1)/2 pairs to each judge, where n is the number of
+performances.
 }
 \examples{
   pairs_all(letters)

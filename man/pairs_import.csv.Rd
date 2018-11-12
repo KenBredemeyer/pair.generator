@@ -11,7 +11,8 @@ pairs_import.csv(scores_file, separation_constraint = FALSE)
 performance ("media"), whether the performance is core (1) or non-core (0),
 and the score of the performance, if available.}
 
-\item{separation_constraint}{Logical.}
+\item{separation_constraint}{Logical.  Are score differences in a pair to be
+restricted in pair generation.}
 }
 \value{
 A data.frame corresponding to the data read in. An error will be
@@ -22,7 +23,7 @@ A data.frame corresponding to the data read in. An error will be
 }
 \description{
 \code{pairs_import.csv} reads in perforance data, and makes the data
-available for other pairwise analysis functions.
+available for other pair generation functions, such as \code{pairs_generate}.
 }
 \details{
 \code{pairs_import.csv} uses \code{read.csv} to read a .csv file, and issues
@@ -30,8 +31,10 @@ warnings if it detects that the format of the input file is not suitable for
 subsequent analysis.
 
 Warnings will be issued if: 1) the headers in \code{scores_file} are not
-"media", "core", "score", or 2) if \code{choose_coreNcore = TRUE} and the
-"core" column does not contain only 1s and 0s, or 3) if
-\code{separtion_constraint} is specified but the "score" column is not
-numeric or not complete.
+"media", "core", "score", or 2) the "core" column does not contain only 1s
+and 0s, or 3) if \code{separtion_constraint} is specified but the "score"
+column is not numeric or not complete.
+
+\code{pairs_import.csv} ensures that data are not read in as factors, which
+can cause problems for other functions in the \code{pair.generator} package.
 }

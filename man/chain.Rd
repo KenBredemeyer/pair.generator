@@ -2,15 +2,27 @@
 % Please edit documentation in R/chain.R
 \name{chain}
 \alias{chain}
-\title{chain pairs}
+\title{Chain pairs}
 \usage{
 chain(pairs, chain_length = 4)
 }
 \arguments{
-\item{pairs}{data.frame containing pairs in columns 1 and 2}
+\item{pairs}{data.frame containing pairs in columns 1 and 2, such as that
+returned from \code{pairs_generate}.}
 
-\item{chain_length}{Integer.}
+\item{chain_length}{Integer, specifying how many consecutive pairs of
+performances/media are to have a common performance.}
 }
 \description{
-chain pairs
+Re-orders rows of a data frame containing \code{left} and \code{right} pairs,
+so that a common performance (or cell value) is included in consecutive
+pairs.
+}
+\examples{
+sampled_pairs <- pairs_sample(letters, av_inclusions = 5)
+chained_pairs <- chain(sampled_pairs, chain_length = 4)
+
+}
+\seealso{
+\code{\link{switch_lr}}
 }

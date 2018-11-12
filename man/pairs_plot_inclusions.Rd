@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_funs.R
 \name{pairs_plot_inclusions}
 \alias{pairs_plot_inclusions}
-\title{barchart to see how well each script is represented.}
+\title{Barchart to see how well each performance is represented.}
 \usage{
 pairs_plot_inclusions(pairs)
 }
@@ -10,5 +10,16 @@ pairs_plot_inclusions(pairs)
 \item{pairs}{A data frame containing pairs of performances.}
 }
 \description{
-barchart to see how well each script is represented.
+To test if \code{pairs_generate} produces pairs which conform to the
+specified range of inclusions of performances, use
+\code{pairs_plot_inclusions} together with \code{abline} (see the example
+below), or use \code{\link{pairs_inclusions_range}}.
+}
+\examples{
+pairs <- pairs_generate(letters[1:10],
+                         av_inclusions = 10,
+                         inclusion_tolerance = 2,
+                         chain_length = 1)
+pairs_plot_inclusions(pairs)
+abline(h = c(10-2, 10+2))
 }

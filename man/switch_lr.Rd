@@ -2,14 +2,18 @@
 % Please edit documentation in R/utils_pairs_make.R
 \name{switch_lr}
 \alias{switch_lr}
-\title{randomize left/right presentation}
+\title{Randomize left/right presentation}
 \usage{
 switch_lr(x)
 }
 \arguments{
-\item{x}{data frame containing paired performances in cols 1 and 2.}
+\item{x}{data frame containing paired performances in columns 1 and 2.}
 }
 \description{
 This function switches the value of the column 1 with the value of column 2,
 for random row numbers.
+}
+\examples{
+pairs <- data.frame(left = letters[1:4], right = 1:4, stringsAsFactors = FALSE)
+switch_lr(pairs)
 }
