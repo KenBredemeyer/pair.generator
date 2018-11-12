@@ -23,7 +23,7 @@
 #'   "chain_number".
 #'
 #' @examples
-#'   pairs_all(letters)
+#'   pairs_all(letters[1:4])
 #'
 #' @export
 pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
@@ -86,7 +86,7 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	if(reps < 1)
 		stop("second argument must be at least 1")
 	combinations <- data.frame(t(utils::combn(scripts, 2)))
-
+  combinations <- cbind(combinations, 1:dim(combinations)[1])
 	if (is.numeric(separation_constraint)) {
 		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
   	combinations_scores <- data.frame(t(utils::combn(media$score, 2)), stringsAsFactors = FALSE)
@@ -99,7 +99,7 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 		combinations_ <- combinations
 		combinations_[1:head, ] <- combinations[head_order, ]
 		combinations_[(head+1):n_combin, ] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 1:2]
-		combinations_[(head+1):n_combin, 3] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 3]
+		combinations_[(head+1):n_combin, 4] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 3]
 	} else {
 		combinations_ <- chain(combinations, chain_length = chain_length)
 	}
@@ -109,7 +109,7 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 		}
 	count <- dim(combinations)[1]
 	pairs <- do.call(rbind, pairs)
-	df_out <- cbind(pairs, rep(1:reps, each = count))
-	colnames(df_out) <- c("left", "right", "chain_number", "judge")
-	as.data.frame(df_out, stringsAsFactors = FALSE)
+	#df_out <- cbind(pairs, rep(1:reps, each = count))
+	colnames(pairs) <- c("left", "right", "combination", "chain_number")
+	as.data.frame(pairs, stringsAsFactors = FALSE)
 }
