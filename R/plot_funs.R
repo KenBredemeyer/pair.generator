@@ -55,6 +55,7 @@ pairs_inclusions_range <- function(pairs) {
 #'   function.
 #' @seealso \code{\link{pairs_plot_inclusions}}
 #' @examples
+#' options(stringsAsFactors = FALSE)
 #' gp <- pairs_generate(letters[1:7],
 #'	                     av_inclusions = 15,
 #'	                     inclusion_tolerance = 2,
