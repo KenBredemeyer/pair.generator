@@ -49,7 +49,7 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
           Check the separation constraint is large enough to accomodate the number of pairs required.")
   }
 
-  pairs_i <- sample(dim(combinations)[1], pairs_length)  #! repeated pairs if pairs_length > dim(combinations)[1]  warn user of repeats
+  pairs_i <- sample(dim(combinations)[1], pairs_length)
   gp <- combinations[pairs_i, ]
   colnames(gp) <- c("left", "right", "combination")
   # generated pairs swapped
@@ -109,21 +109,21 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 		rem <- av_inclusions %% (n_scripts - 1)
 		# generate remaining pairs
 		if (rem != 0) {
-		gpr <- pairs_generate_(media, av_inclusions = rem, inclusion_tolerance = inclusion_tolerance,
-			                    separation_constraint = separation_constraint)
-		gpr <- chain(gpr, chain_length = chain_length)
+			gpr <- pairs_generate_(media, av_inclusions = rem, inclusion_tolerance = inclusion_tolerance,
+				                    separation_constraint = separation_constraint)
+			gpr <- chain(gpr, chain_length = chain_length)
 
-		# generated pairs exhaustive
-		gpe <- exhaustive_pairs(media, n_judges = reps, separation_constraint = separation_constraint,
-			head_order = gpr$combination, chain_length = chain_length)
-    gpe[["chain_number"]] <- gpe[["chain_number"]] + utils::tail(gpr, 1)[["chain_number"]]
-    gpe[1:dim(gpr)[1], "chain_number"] <- gpr[["chain_number"]]
-    if (reps > 1) {
-	    for (i in seq_len(reps-1)) {
-	    	gpe[(1+i*n_exhaustive_pairs):(i*n_exhaustive_pairs + dim(gpr)[1]), 3] <- gpr$chain
+			# generated pairs exhaustive
+			gpe <- exhaustive_pairs(media, n_judges = reps, separation_constraint = separation_constraint,
+				head_order = gpr$combination, chain_length = chain_length)
+	    gpe[["chain_number"]] <- gpe[["chain_number"]] + utils::tail(gpr, 1)[["chain_number"]]
+	    gpe[1:dim(gpr)[1], "chain_number"] <- gpr[["chain_number"]]
+	    if (reps > 1) {
+		    for (i in seq_len(reps-1)) {
+		    	gpe[(1+i*n_exhaustive_pairs):(i*n_exhaustive_pairs + dim(gpr)[1]), 3] <- gpr$chain
+		    }
 	    }
-    }
-	  gp <- rbind(gpe, gpr)
+		  gp <- rbind(gpe, gpr)
 		} else {
 			gp <- exhaustive_pairs(media, n_judges = reps, separation_constraint = separation_constraint,
 				                     chain_length = chain_length)
