@@ -4,11 +4,12 @@
 #' @param separation_constraint Numeric value to be used in \code{pairs_make}
 #'
 #' @return message suggesting the minimum separation constraint to use in
-#'   \code{pairs_make}.  Using a separation constraint below this value will
-#'   almost certainly cause problems during estimation of item parameters.  In
-#'   particular, this function tests for the potential for discontinuity in the
-#'   scale.  It is recommended to use a separation constraint (if at all) that
-#'   is well above the advised minimum.
+#'   \code{pairs_generate}, or other pair generating functions which have the
+#'   \code{separation_constraint} argument. Using a separation constraint below
+#'   this value will almost certainly cause problems during estimation of item
+#'   parameters.  In particular, this function tests for the potential for
+#'   discontinuity in the scale.  It is recommended to use a separation
+#'   constraint (if at all) that is well above the advised minimum.
 #' @export
 test_min_separation <- function(scores, separation_constraint) {   # could call sep_const. "max_score_range"
 	ordered_scores <- round(sort(scores), 3)
