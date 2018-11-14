@@ -116,14 +116,14 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 		# generated pairs exhaustive
 		gpe <- exhaustive_pairs(media, n_judges = reps, separation_constraint = separation_constraint,
 			head_order = gpr$combination, chain_length = chain_length)
-    gpe[ , 3] <- gpe[ , 3] + utils::tail(gpr, 1)$chain
-    gpe[1:dim(gpr)[1], 3] <- gpr$chain
+    gpe[["chain_number"]] <- gpe[["chain_number"]] + utils::tail(gpr, 1)[["chain_number"]]
+    gpe[1:dim(gpr)[1], "chain_number"] <- gpr[["chain_number"]]
     if (reps > 1) {
 	    for (i in seq_len(reps-1)) {
 	    	gpe[(1+i*n_exhaustive_pairs):(i*n_exhaustive_pairs + dim(gpr)[1]), 3] <- gpr$chain
 	    }
     }
-	  gp <- rbind(gpe[ , c("left", "right", "chain_number")], gpr[ , c("left", "right", "chain_number")])
+	  gp <- rbind(gpe, gpr)
 		} else {
 			gp <- exhaustive_pairs(media, n_judges = reps, separation_constraint = separation_constraint,
 				                     chain_length = chain_length)

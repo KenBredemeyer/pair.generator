@@ -57,7 +57,7 @@ pairs_all <- function(media, n_judges = 1, separation_constraint = NULL) {
 }
 
 
-# for use in pairs_generate (multiple)
+# only call from pairs_generate
 #
 # combinations is one set of exhaustive pairs
 #
@@ -86,6 +86,7 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 	if(reps < 1)
 		stop("second argument must be at least 1")
 	combinations <- data.frame(t(utils::combn(scripts, 2)))
+	# add 'combination' variable ([[3]])
   combinations <- cbind(combinations, 1:dim(combinations)[1])
 	if (is.numeric(separation_constraint)) {
 		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
@@ -98,8 +99,9 @@ exhaustive_pairs <- function(media, n_judges = 1, separation_constraint = NULL,
 		n_combin <- dim(combinations)[1]
 		combinations_ <- combinations
 		combinations_[1:head, ] <- combinations[head_order, ]
-		combinations_[(head+1):n_combin, ] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 1:2]
-		combinations_[(head+1):n_combin, 4] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 3]
+		combinations_[(head+1):n_combin, ] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , 1:3]
+		# add comninations_[["chain_number]]
+		combinations_[(head+1):n_combin, 4] <- chain(combinations[-head_order, ], chain_length = chain_length)[ , "chain_number"]
 	} else {
 		combinations_ <- chain(combinations, chain_length = chain_length)
 	}
