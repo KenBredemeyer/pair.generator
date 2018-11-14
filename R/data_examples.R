@@ -12,9 +12,9 @@
 #' \describe{
 #'   \item{media}{the label of the performance or media
 #'   item.  Often a file name.}
-#'   \item{core}{1 = core, 0 = non-core.  Core is for making a new scale,
-#'   non-core is for locating on an existing scale.}
-#'   \item{score}{score of the performance if available. May be missing.}
+#'   \item{core}{1 for core, 0 for non-core.  Core is for making a new scale,
+#'   non-core is for locating a performance on an existing scale.}
+#'   \item{score}{Examples of student scores out of 100.}
 #'   }
 "data_standard"
 
@@ -33,9 +33,9 @@
 #' \describe{
 #'   \item{media}{the label of the performance or media
 #'   item.  Often a file name.}
-#'   \item{core}{1 = core, 0 = non-core.  Core is for making a new scale,
-#'   non-core is for locating on an existing scale.}
-#'   \item{score}{score of the performance if available. May be missing.}
+#'   \item{core}{1 for core, 0 for non-core.  Core is for making a new scale,
+#'   non-core is for locating a performance on an existing scale.}
+#'   \item{score}{Examples of student scores out of 100.}
 #'   }
 "data_cnc"
 

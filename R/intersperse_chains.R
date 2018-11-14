@@ -1,7 +1,7 @@
 #' Intersperse incomplete chains with full chains.  Use this function if it is
 #' desirable to avoid incomplete chains being allocated unevenly among judges.
 #'
-#' Here, *chaining* refers to consecutive pairs having a common performance or
+#' Here, \emph{chaining} refers to consecutive pairs having a common performance or
 #' item.  Chain length is the specified number of consecutive pairs which
 #' contain a common item or performance, and is specified as an argument to the
 #' \code{pairs_generate} and \code{chain} functions.  Complete chains are where
