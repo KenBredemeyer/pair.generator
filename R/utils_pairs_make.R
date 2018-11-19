@@ -23,10 +23,10 @@ sampler <- function(scripts, s1_size) {
 #' switch_lr(pairs)
 #' @export
 switch_lr <- function(pairs) {
-  switch_index <- sort(sample(1:nrow(x), nrow(x) / 2))
-  temp_copy <- x
-  temp_copy[switch_index, 1] <- x[switch_index, 2]
-  temp_copy[switch_index, 2] <- x[switch_index, 1]
-  x <- temp_copy
-  x
+  switch_index <- sort(sample(1:nrow(pairs), nrow(pairs) / 2))
+  temp_copy <- pairs
+  temp_copy[switch_index, 1] <- pairs[switch_index, 2]
+  temp_copy[switch_index, 2] <- pairs[switch_index, 1]
+  pairs <- temp_copy
+  pairs
 }
