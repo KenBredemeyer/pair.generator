@@ -1,0 +1,90 @@
+---
+title: "pair.generator Useage Guide"
+author: "Ken Bredemeyer"
+date: "28 August 2018"
+output:
+  pdf_document: default
+  html_document: default
+vignette: |
+  %\VignetteIndexEntry{pair.generator Inroduction} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Generating Pairs for Pairwise Comparisons
+
+This short introduction provides usage for the `pair.generator` package, for generating a set of pairs for judges to compare.  [user supplies performance names]
+
+See ... for an introduction to pairwise comparisons.
+
+
+
+```{r generate pairs}
+library(pair.generator)
+
+# View built-in data set
+head(data_standard)
+
+# set a rng seed for reproducibility
+set.seed(1)
+
+# Make a set of pairs
+pairs_set <- pairs_generate(data_standard, 
+	                          av_inclusions = 7,
+		                        inclusion_tolerance = 2,
+		                        separation_constraint = 40,
+		                        chain_length = 4)
+
+head(pairs_set)
+tail(pairs_set)
+
+```
+The practice data set `data_standard` contains 26 performances, scores for the performances, and all performances are 'core', so are to be used for standard pair generation rather than core v non-core.
+
+`pairs_set` contains the performances to be presented to judges on the left, paired with a perofmance on the right, and the chain number.  Complete chains are at the top of the set and incomplete chains are present in the last few rows of the data frame.  To get only complete chains, choose arguments such that $(n - 1) \times avinclusions \mod chain length = 0$, or use `pairs_make()` which always produces complete chains.
+
+Mix complete and incomplete chains using `intersperse_chains()`.
+```{r}
+pairs_set <- intersperse_chains(pairs_set, 4)
+head(pairs_set, 10)
+tail(pairs_set, 10)
+```
+
+The maximum absolute difference in scores between performances in a pair in `pairs_set` is 40, determined by the argument `separation_constraint`.  Check that the separation constraint has been applied successfully using `score_diff()`, which adds new columns for scores and score differences to the returned data frame.
+```{r}
+suppressPackageStartupMessages(library(dplyr))
+pairs_scores <- score_diff(pairs_set, data_standard)
+head(pairs_scores)
+paste0("Maximum absolute score difference is ", max(pairs_scores$score_difference))
+```
+
+Check that each performances is included the specified number of times in the set of generated pairs using `pairs_inclusion_range()` and `pairs_plot_inclusions()`.
+
+```{r}
+message("The range of inclusions of performances in the set of generated pairs is ")
+pairs_inclusion_range(pairs_set)
+pairs_plot_inclusions(pairs_set)
+abline(h = 7 - 2); abline(h = 7 + 2)
+```
+
+Check that there are no repeated pairs using `duplicates()`, and graphically using `pairs_plot()`.
+```{r}
+duplicates(pairs_set)
+pairs_plot(pairs_set) 
+```
+
+Allocate pairs to judges and check for duplicates in any judge's pairs.
+```{r}
+allocated_pairs <- pairs_allocate(pairs_set, judges = 5)
+
+judge_sets <- split(allocated_pairs, f = as.factor(allocated_pairs$judge))
+judge_duplicates <- lapply(judge_sets, duplicates)
+
+```
+
+```{r}
+allocated_pairs[53:72, ]   # problem with any_judge_duplicates()!!
+
+```
