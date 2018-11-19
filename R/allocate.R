@@ -11,10 +11,10 @@
 #'	                   av_inclusions = 10,
 #'	                   inclusion_tolerance = 1,
 #'	                   chain_length = 1)
-#' allocated_pairs <- allocate(gp, judges = 5)
+#' allocated_pairs <- pairs_allocate(gp, judges = 5)
 #'
 #' @export
-allocate <- function(pairs, judges) {
+pairs_allocate <- function(pairs, judges) {
 	# allocate pairs_each (equal pairs for each judge)
 	if (length(judges) == 1) {
 		pairs_each <- dim(pairs)[1] %/% judges
@@ -58,6 +58,6 @@ allocate2 <- function(pairs, n_judges) {
 		allocated_pairs[order(allocated_pairs$judge), ]
 
 	} else if (is.null(dups)) {
-		allocate(pairs, n_judges)
+		pairs_allocate(pairs, n_judges)
 	}
 }

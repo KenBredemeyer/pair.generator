@@ -22,7 +22,7 @@
 #' duplicates(gp)
 #'
 #' # check if there are any duplicates for the judges
-#' allocated_pairs <- allocate(gp, judges = 5)
+#' allocated_pairs <- pairs_allocate(gp, judges = 5)
 #' judge_sets <- split(allocated_pairs, f = as.factor(allocated_pairs$judge))
 #' judge_duplicates <- lapply(judge_sets, duplicates)
 #'
