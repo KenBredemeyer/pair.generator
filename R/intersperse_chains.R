@@ -1,5 +1,5 @@
 #' Intersperse incomplete chains with full chains.  Use this function if it is
-#' desirable to avoid incomplete chains being allocated unevenly among judges.
+#' desirable to avoid incomplete chains being allocated unevenly among judges
 #'
 #' Here, \emph{chaining} refers to consecutive pairs having a common performance or
 #' item.  Chain length is the specified number of consecutive pairs which
@@ -9,7 +9,7 @@
 #' that specified, and incomplete chains have a performance common to a number
 #' of consecutive pairs which is less than \code{chain_length}.
 #'
-#' @param pairs data.frame containing chained pairs, returned from \code{chain}.
+#' @param pairs A data frame containing chained pairs, returned from \code{chain}.
 #' @param chain_length Integer specifying the number of consecutive pairs to
 #'   include a common performance.
 #'

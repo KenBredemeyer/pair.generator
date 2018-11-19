@@ -3,12 +3,12 @@
 #'Use this function to check that a separation constraint has been successfully
 #'applied using \code{pairs_generate}, or similar function.
 #'
-#'@param pairs data.frame returned from \code{generate_pairs} or similar
+#'@param pairs Data frame returned from \code{generate_pairs} or similar
 #'  function
-#'@param media data.frame containing the variables \code{media, core, score}.
+#'@param media Data frame containing the variables \code{media, core, score}.
 #'  \code{score} must be numeric.
 #'
-#'@return data.frame similar to \code{pairs}, but with \code{left_score},
+#'@return Data frame similar to \code{pairs}, but with \code{left_score},
 #'  \code{right_score}, and \code{score_difference} columns added.
 #' @examples
 #' # check separation constraint

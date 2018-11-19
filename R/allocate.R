@@ -1,6 +1,6 @@
 #' Allocate pairs to judges
 #'
-#' @param pairs data frame containing pairs in two columns, such as returned
+#' @param pairs A data frame containing pairs in two columns, such as returned
 #'   from \code{pairs_generate}
 #' @param judges Single integer specifying the number of judges to allocate
 #'   pairs evenly to, or a vector of integers specifying the number of pairs to

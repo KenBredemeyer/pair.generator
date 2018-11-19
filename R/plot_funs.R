@@ -51,7 +51,7 @@ pairs_inclusions_range <- function(pairs) {
 
 #' Plot the frequency of unique pairs included in \code{pairs}
 #'
-#' @param pairs data.frame returned from \code{pairs_generate} or similar
+#' @param pairs A data frame returned from \code{pairs_generate} or similar
 #'   function.
 #' @seealso \code{\link{pairs_plot_inclusions}}
 #' @examples

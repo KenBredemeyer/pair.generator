@@ -39,8 +39,8 @@ chain_once <- function(pairs, chain_length, times, n_performances) {
 #' so that a common performance (or cell value) is included in consecutive
 #' pairs.
 #'
-#' @param pairs data.frame containing pairs in columns 1 and 2, such as that
-#'   returned from \code{pairs_generate}.
+#' @param pairs A data frame containing pairs in columns 1 and 2, such as that
+#'   returned from \code{pairs_generate}.  Other columns may also be present.
 #' @param chain_length Integer, specifying how many consecutive pairs of
 #'   performances/media are to have a common performance.
 #'
