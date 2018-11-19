@@ -1,6 +1,6 @@
-#' Generate exhaustive pairs.
+#' Generate exhaustive pairs
 #'
-#' \code{all_pairs} generates all unique pairs for pairwise comparisons.
+#' \code{pairs_all} generates all unique pairs for pairwise comparisons.
 #'
 #' Exhaustive pairs (each media item, or performance, paired with all others)
 #' can be created for  any number of judges.  Each judge will view all
@@ -8,19 +8,19 @@
 #' performances.
 #'
 #' @param media Character vector of performances to compare, or data frame
-#'   containting the variables \code{media, core, score}.
+#'   containing the variables \code{media, core, score}.
 #'
-#' @param n_judges Integer value at least 1. Use this to make import file for
-#'   multiple judges.  Use reps value at least equal to the number of judges.
+#' @param n_judges Integer, at least 1. Use this to make import file for
+#'   multiple judges.  Use a value at least equal to the number of judges.
 #'
 #' @param separation_constraint Numeric. Maximum absolute difference in scores
 #'   for performances in a pair.  If a separation constraint is specified, which
 #'   is less than the maximum absolute difference between any two performances,
 #'   then the resulting design will not be exhaustive.
 #'
-#' @return A data frame containing columns "left", "right" and "judge". If
-#'   you're importing into Pairwise Comparisons Application, change "judge" to
-#'   "chain_number".
+#' @return A data frame containing columns \code{left}, \code{right} and \code{judge}. If
+#'   you're importing into Pairwise Comparisons Application, change \code{judge} to
+#'   \code{chain_number}.
 #'
 #' @examples
 #'   pairs_all(letters[1:4])

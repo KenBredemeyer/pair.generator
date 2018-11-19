@@ -17,12 +17,12 @@ sampler <- function(scripts, s1_size) {
 #' This function switches the value of the column 1 with the value of column 2,
 #' for random row numbers.
 #'
-#' @param x data frame containing paired performances in columns 1 and 2.
+#' @param pairs Data frame containing paired performances in columns 1 and 2.
 #' @examples
 #' pairs <- data.frame(left = letters[1:4], right = 1:4, stringsAsFactors = FALSE)
 #' switch_lr(pairs)
 #' @export
-switch_lr <- function(x) {
+switch_lr <- function(pairs) {
   switch_index <- sort(sample(1:nrow(x), nrow(x) / 2))
   temp_copy <- x
   temp_copy[switch_index, 1] <- x[switch_index, 2]

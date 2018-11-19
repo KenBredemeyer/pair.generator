@@ -1,9 +1,9 @@
-#' Show all duplicates in a set of pairs.
+#' Show all duplicates in a set of pairs
 #'
 #' Use this function on objects returned from \code{pairs_generate}, or similar
 #' functions, to check if there are repeated comparisons for judges.
 #'
-#' @param pairs A data frame containing pairs, for example, and object returned
+#' @param pairs A data frame containing pairs, for example, an object returned
 #'   from \code{pairs_generate}.  This data frame must include the
 #'   \code{combinations} variable.
 #' @param message Logical.  Should a message be returned if there are no

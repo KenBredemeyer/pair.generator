@@ -68,7 +68,7 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 #'Standard pairs generation.
 #'
 #'@param media Character vector of media or performance labels, or a data.frame
-#'  containing "media", "core", and "score" variables.
+#'  containing \code{media}, \code{core}, and \code{score} variables.
 #'@param av_inclusions Integer specifying the average number of inclusions per
 #'  media or performance.
 #'@param inclusion_tolerance Integer. What should the difference between average

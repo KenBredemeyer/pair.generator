@@ -1,9 +1,9 @@
-#' test minimum separation constraint
+#' Test minimum separation constraint
 #'
-#' @param scores Numeric vector of scores from the scores file
-#' @param separation_constraint Numeric value to be used in \code{pairs_make}
+#' @param scores Numeric vector of scores from the scores file.
+#' @param separation_constraint Numeric value to be used in \code{pairs_make}.
 #'
-#' @return message suggesting the minimum separation constraint to use in
+#' @return Message suggesting the minimum separation constraint to use in
 #'   \code{pairs_generate}, or other pair generating functions which have the
 #'   \code{separation_constraint} argument. Using a separation constraint below
 #'   this value will almost certainly cause problems during estimation of item

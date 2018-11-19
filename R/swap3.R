@@ -1,4 +1,5 @@
-#' Modify a data frame of pairs to improve the inclusion range of performances
+#' Modify a data frame of pairs to improve the range of inclusions of
+#' performances
 #'
 #' \code{improve_inclusions} swaps pairs between the set of generated pairs
 #' (\code{gp}) in the first argument with pairs in the set of all pairs
@@ -6,14 +7,15 @@
 #' fashion, trying to conform to the specified inclusion range.  Use this
 #' function if \code{pairs_generate} is not able to return a data frame, or is
 #' taking excessively long.
-#' @param gp Data frame of left/right comparisons
+#' @param gp Data frame of pairs, such as that returned from
+#'   \code{pairs_sample}.
 #' @param combinations Data frame containing \code{left} veriable in column 1
-#'   and \code{right} variable in column 2.  All possible pais of performances.
-#'   \code{combinations} can be created will \code{pairs_all}.
+#'   and \code{right} variable in column 2.  All possible pairs of performances.
+#'   \code{combinations} can be created with \code{pairs_all}.
 #' @param av_inclusions Integer. Average number of times performances are to be
 #'   included in the set of generated pairs.
 #' @param inclusion_tolerance Integer.  Difference between the maximum or
-#'   minimnumber of times each performnace is included and the average
+#'   minim number of times each performnace is included and the average
 #'   inclusions.
 #' @param animate Logical.  Should plots showing the current number of
 #'   inclusions for each performance be displayed.
@@ -21,13 +23,13 @@
 #' @param allow_repeats Logical.  Should duplicate pairs be generated.
 #'
 #' @return A data frame in the same form as \code{gp}, its first argument, but
-#'   modified to meet speicified inclusions of performances.  Messages
+#'   modified to meet specified inclusions of performances.  Messages
 #'   indicating the iteration number, and the range of inclusions at the
-#'   corresponding iteration are output to the console.  An inclusion plots
+#'   corresponding iteration are output to the console.  An inclusion plot
 #'   updated at every iteration is optionally displayed with the \code{animate}
 #'   argument.
 #' @examples
-#' set.seed(1)
+#' set.seed(1) # for reproducability
 #' sampled_pairs <- pairs_sample(letters, av_inclusions = 10)
 #' pairs <- improve_inclusions(sampled_pairs,
 #'                             combinations = pairs_all(letters)[ , 1:3],

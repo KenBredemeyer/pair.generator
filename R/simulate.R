@@ -1,4 +1,4 @@
-#' simulate judgements of pairwise comparisons
+#' Simulate judgements of pairwise comparisons
 #'
 #' \code{sim_judge} is intended for investigating model properties at the
 #' estimation stage, for research purposes.

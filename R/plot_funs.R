@@ -1,4 +1,4 @@
-#' Barchart to see how well each performance is represented.
+#' Barchart to see how well each performance is represented
 #'
 #' To test if \code{pairs_generate} produces pairs which conform to the
 #' specified range of inclusions of performances, use
@@ -29,7 +29,7 @@ pairs_plot_inclusions <- function(pairs) {
 }
 
 #' Range of inclusions per media/performance
-#' @param pairs data.frame returned from \code{pairs_generate},
+#' @param pairs \code{data.frame} returned from \code{pairs_generate},
 #'   \code{pairs_generate_cnc}, or similar function.
 #'
 #' @return Numeric vector length 2, reporting the minimum and maximum number of
@@ -93,7 +93,7 @@ pairs_plot <- function(pairs) {
 
 #' Plot the scores of performances in each pair
 #'
-#' This plot can be used to check that groups of performances are not isolate,
+#' This plot can be used to check that groups of performances are not isolated,
 #' and provides an indication that the separation constraint used in
 #' \code{pairs_generate} or similar function is working correctly.  Currently,
 #' overplotting of performance labels occurs for performances which have close
