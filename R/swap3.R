@@ -35,7 +35,7 @@
 #'                             combinations = pairs_all(letters)[ , 1:3],
 #'                             av_inclusions = 10,
 #'                             inclusion_tolerance = 1)
-#' pairs_inclusions_range(pairs)
+#' pairs_inclusion_range(pairs)
 #'
 #' @seealso \code{\link{pairs_sample}}, \code{\link{chain}},
 #'   \code{\link{switch_lr}}
@@ -143,7 +143,7 @@ improve_inclusions <- function(gp, combinations, av_inclusions, inclusion_tolera
 
 		if (loop_index %% 20 == 0) {
 			message(paste0("iteration number  ", loop_index))
-			print(pairs_inclusions_range(gp))
+			print(pairs_inclusion_range(gp))
 		}
 	loop_index <- loop_index + 1
 	}

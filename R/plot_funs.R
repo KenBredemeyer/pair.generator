@@ -3,7 +3,7 @@
 #' To test if \code{pairs_generate} produces pairs which conform to the
 #' specified range of inclusions of performances, use
 #' \code{pairs_plot_inclusions} together with \code{abline} (see the example
-#' below), or use \code{\link{pairs_inclusions_range}}.
+#' below), or use \code{\link{pairs_inclusion_range}}.
 #'
 #' @param pairs A data frame containing pairs of performances.
 #' @examples
@@ -40,9 +40,9 @@ pairs_plot_inclusions <- function(pairs) {
 #'                         av_inclusions = 2,
 #'	                       inclusion_tolerance = 1,
 #'	                       chain_length = 1)
-#' pairs_inclusions_range(pairs)
+#' pairs_inclusion_range(pairs)
 #' @export
-pairs_inclusions_range <- function(pairs) {
+pairs_inclusion_range <- function(pairs) {
 	sampling <- rle(sort(unlist(pairs[ , 1:2])))
 	s.f. <- sampling[[1]]
 	names(s.f.) <- sampling[[2]]
