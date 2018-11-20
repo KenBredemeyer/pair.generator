@@ -120,7 +120,7 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 	    gpe[1:dim(gpr)[1], "chain_number"] <- gpr[["chain_number"]]
 	    if (reps > 1) {
 		    for (i in seq_len(reps-1)) {
-		    	gpe[(1+i*n_exhaustive_pairs):(i*n_exhaustive_pairs + dim(gpr)[1]), 3] <- gpr$chain
+		    	gpe[(1+i*n_exhaustive_pairs):(i*n_exhaustive_pairs + dim(gpr)[1]), 4] <- gpr[["chain_number"]]
 		    }
 	    }
 		  gp <- rbind(gpe, gpr)
