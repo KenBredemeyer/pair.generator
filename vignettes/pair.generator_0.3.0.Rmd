@@ -5,8 +5,10 @@ date: "28 August 2018"
 output:
   pdf_document: default
   html_document: default
-vignette: |
-  %\VignetteIndexEntry{pair.generator Inroduction} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+vignette: >
+  %\VignetteIndexEntry{pair.generator Inroduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}
