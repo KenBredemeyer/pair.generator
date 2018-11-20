@@ -2,23 +2,23 @@
 % Please edit documentation in R/io.R
 \name{pairs_import.csv}
 \alias{pairs_import.csv}
-\title{read in data}
+\title{Read in data from file}
 \usage{
 pairs_import.csv(scores_file, separation_constraint = FALSE)
 }
 \arguments{
-\item{scores_file}{a path and .csv file containing the label of the
-performance ("media"), whether the performance is core (1) or non-core (0),
-and the score of the performance, if available.}
+\item{scores_file}{Path and ".csv" file name containing the label of the
+performance (\code{media}), whether the performance is core (1) or non-core
+(0), and the score of the performance, if available.}
 
 \item{separation_constraint}{Logical.  Are score differences in a pair to be
 restricted in pair generation.}
 }
 \value{
-A data.frame corresponding to the data read in. An error will be
+A data frame corresponding to the data read in. An error will be
   returned if the headers are not correct in \code{scores_file}, if there are
-  missing media labels, if 'core' is not all 0 or 1.  An error will also be
-  returned if \code{separation_constraint == TRUE} and there are missing or
+  missing media labels, if \code{core} is not all 0 or 1.  An error will also be
+  returned if \code{separation_constraint = TRUE} and there are missing or
   non-numeric scores.
 }
 \description{
@@ -31,9 +31,9 @@ warnings if it detects that the format of the input file is not suitable for
 subsequent analysis.
 
 Warnings will be issued if: 1) the headers in \code{scores_file} are not
-"media", "core", "score", or 2) the "core" column does not contain only 1s
-and 0s, or 3) if \code{separtion_constraint} is specified but the "score"
-column is not numeric or not complete.
+\code{media}, \code{core}, \code{score}, or 2) the \code{core} column does
+not contain only 1s and 0s, or 3) if \code{separtion_constraint} is specified
+but the \code{score} column is not numeric or not complete.
 
 \code{pairs_import.csv} ensures that data are not read in as factors, which
 can cause problems for other functions in the \code{pair.generator} package.

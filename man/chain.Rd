@@ -7,8 +7,8 @@
 chain(pairs, chain_length = 4)
 }
 \arguments{
-\item{pairs}{data.frame containing pairs in columns 1 and 2, such as that
-returned from \code{pairs_generate}.}
+\item{pairs}{A data frame containing pairs in columns 1 and 2, such as that
+returned from \code{pairs_generate}.  Other columns may also be present.}
 
 \item{chain_length}{Integer, specifying how many consecutive pairs of
 performances/media are to have a common performance.}

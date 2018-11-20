@@ -3,12 +3,12 @@
 \name{intersperse_chains}
 \alias{intersperse_chains}
 \title{Intersperse incomplete chains with full chains.  Use this function if it is
-desirable to avoid incomplete chains being allocated unevenly among judges.}
+desirable to avoid incomplete chains being allocated unevenly among judges}
 \usage{
 intersperse_chains(pairs, chain_length)
 }
 \arguments{
-\item{pairs}{data.frame containing chained pairs, returned from \code{chain}.}
+\item{pairs}{A data frame containing chained pairs, returned from \code{chain}.}
 
 \item{chain_length}{Integer specifying the number of consecutive pairs to
 include a common performance.}
@@ -18,7 +18,7 @@ A data frame which is the same as first argument of
   \code{intersperse_chains}, but with re-ordered rows.
 }
 \description{
-Here, *chaining* refers to consecutive pairs having a common performance or
+Here, \emph{chaining} refers to consecutive pairs having a common performance or
 item.  Chain length is the specified number of consecutive pairs which
 contain a common item or performance, and is specified as an argument to the
 \code{pairs_generate} and \code{chain} functions.  Complete chains are where

@@ -4,10 +4,10 @@
 \alias{switch_lr}
 \title{Randomize left/right presentation}
 \usage{
-switch_lr(x)
+switch_lr(pairs)
 }
 \arguments{
-\item{x}{data frame containing paired performances in columns 1 and 2.}
+\item{pairs}{Data frame containing paired performances in columns 1 and 2.}
 }
 \description{
 This function switches the value of the column 1 with the value of column 2,

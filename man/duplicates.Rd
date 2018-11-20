@@ -2,12 +2,12 @@
 % Please edit documentation in R/duplicates.R
 \name{duplicates}
 \alias{duplicates}
-\title{Show all duplicates in a set of pairs.}
+\title{Show all duplicates in a set of pairs}
 \usage{
 duplicates(pairs, message = TRUE)
 }
 \arguments{
-\item{pairs}{A data frame containing pairs, for example, and object returned
+\item{pairs}{A data frame containing pairs, for example, an object returned
 from \code{pairs_generate}.  This data frame must include the
 \code{combinations} variable.}
 
@@ -32,7 +32,7 @@ gp <- pairs_generate(data_standard,
 duplicates(gp)
 
 # check if there are any duplicates for the judges
-allocated_pairs <- allocate(gp, judges = 5)
+allocated_pairs <- pairs_allocate(gp, judges = 5)
 judge_sets <- split(allocated_pairs, f = as.factor(allocated_pairs$judge))
 judge_duplicates <- lapply(judge_sets, duplicates)
 

@@ -2,23 +2,24 @@
 % Please edit documentation in R/test_min_sep.R
 \name{test_min_separation}
 \alias{test_min_separation}
-\title{test minimum separation constraint}
+\title{Test minimum separation constraint}
 \usage{
 test_min_separation(scores, separation_constraint)
 }
 \arguments{
-\item{scores}{Numeric vector of scores from the scores file}
+\item{scores}{Numeric vector of scores from the scores file.}
 
-\item{separation_constraint}{Numeric value to be used in \code{pairs_make}}
+\item{separation_constraint}{Numeric value to be used in \code{pairs_make}.}
 }
 \value{
-message suggesting the minimum separation constraint to use in
-  \code{pairs_make}.  Using a separation constraint below this value will
-  almost certainly cause problems during estimation of item parameters.  In
-  particular, this function tests for the potential for discontinuity in the
-  scale.  It is recommended to use a separation constraint (if at all) that
-  is well above the advised minimum.
+Message suggesting the minimum separation constraint to use in
+  \code{pairs_generate}, or other pair generating functions which have the
+  \code{separation_constraint} argument. Using a separation constraint below
+  this value will almost certainly cause problems during estimation of item
+  parameters.  In particular, this function tests for the potential for
+  discontinuity in the scale.  It is recommended to use a separation
+  constraint (if at all) that is well above the advised minimum.
 }
 \description{
-test minimum separation constraint
+Test minimum separation constraint
 }

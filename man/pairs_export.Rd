@@ -7,13 +7,15 @@
 pairs_export(gp, file)
 }
 \arguments{
-\item{gp}{data.frame returned from \code{pairs_make}}
+\item{gp}{A data frame returned from \code{pairs_generate}, or other pair
+generating function.}
 
-\item{file}{Character string naming a file for writing}
+\item{file}{Character string naming a file for writing to.}
 }
 \description{
-\code{pairs_export} selects the variables 'left', 'right', 'chain_number' and
-writes to file using \code{write.csv}.
+\code{pairs_export} selects the variables \code{left}, \code{right} and
+\code{chain_number} from \code{gp}, and writes to file using
+\code{write.csv}.
 }
 \seealso{
 \code{\link{pairs_generate}}
