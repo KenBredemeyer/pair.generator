@@ -17,7 +17,7 @@
 #'   \code{intersperse_chains}, but with re-ordered rows.
 #'
 #' @seealso \code{\link{pairs_generate}}, \code{\link{chain}},
-#'   \code{\link{allocate}}
+#'   \code{\link{pairs_allocate}}
 #' @export
 intersperse_chains <- function(pairs, chain_length) {
   rles <- rle(pairs$chain_number)
