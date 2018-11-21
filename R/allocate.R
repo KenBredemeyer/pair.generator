@@ -34,7 +34,7 @@ pairs_allocate <- function(pairs, judges) {
 allocate2 <- function(pairs, n_judges) {
 	## what if uneven allocations to judges??
 	stopifnot()
-	dups <- suppressMessages(duplicates2(pairs))
+	dups <- suppressMessages(duplicates(pairs))
 	if (!is.null(dups)) {
 		stopifnot(n_judges >= dups[1, "freq"])    # "warning: delete some duplilcates or ..."
 		# delete excessive duplicates?
