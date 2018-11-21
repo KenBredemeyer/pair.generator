@@ -11,7 +11,8 @@
 #'
 #' @return A data frame showing which pairs are repeated, if any, or \code{NULL}
 #'   if there are no repeated pairs.  A message is also optionally returned if
-#'   there are no repeated pairs.
+#'   there are no repeated pairs.  The column \code{pairs_i} contains the row
+#'   numbers from \code{pairs} which have duplicated pairs.
 #'
 #' @examples
 #' # check if there are any duplicates in a set of pairs
@@ -35,7 +36,7 @@ duplicates <- function(pairs, message = TRUE) {
 		duplicates_df <- cbind(pairs[dups_i, ], pairs_i = dups_i)
 
 		duplicates_df <- duplicates_df[order(duplicates_df$combination), ]
-		duplicates_df <- transform(duplicates_df, freq= ave(seq(nrow(duplicates_df)), combination, FUN=length))
+		duplicates_df <- transform(duplicates_df, freq= stats::ave(seq(nrow(duplicates_df)), duplicates_df$combination, FUN=length))
 	  duplicates_df <- duplicates_df[order(-duplicates_df$freq), ]
 	  rownames(duplicates_df) <- 1:dim(duplicates_df)[1]
 	  duplicates_df
