@@ -17,9 +17,6 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 		stopifnot(!is.null(media$score), !any(is.na(media$score)), is.numeric(media$score))
 	}
 
-	stringsAsFactorsOption <- getOption("stringsAsFactors")
-  options(stringsAsFactors = FALSE)
-
 	# take vector of script labels or a data.frame
 	if (!is.null(dim(media))) {
 		if(!is.null(media$media)) {
@@ -55,7 +52,6 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
   # generated pairs swapped
   gps <- swap2(gp = gp, combinations = combinations, av_inclusions = av_inclusions,
   	           inclusion_tolerance = inclusion_tolerance)
-  options(stringsAsFactors = stringsAsFactorsOption)
   attr(gps, "initial_sampling") <- gp
 
   gps
@@ -93,6 +89,10 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 #'@export
 pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 	separation_constraint = NULL, chain_length) {
+
+	stringsAsFactorsOption <- getOption("stringsAsFactors")
+  options(stringsAsFactors = FALSE)
+
 	# media can be vector or data.frame
 	if (!is.null(dim(media))) {
     n_scripts <- dim(media)[1]
@@ -131,6 +131,7 @@ pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
 	}
   gp <- switch_lr(gp)
   rownames(gp) <- 1:dim(gp)[1]
+  options(stringsAsFactors = stringsAsFactorsOption)
   gp
 }
 
