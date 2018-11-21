@@ -17,7 +17,7 @@
 #'	                        inclusion_tolerance = 2,
 #'	                        chain_length = 1,
 #'	                        separation_constraint = 30)
-#' pairs_scores <- score_diff(gpp, data_standard)
+#' pairs_scores <- score_diff(pairs, data_standard)
 #' max(pairs_scores$score_difference)
 #'
 #'@export
