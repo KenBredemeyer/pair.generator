@@ -88,7 +88,7 @@ pairs_generate_ <- function(media, av_inclusions, inclusion_tolerance,
 #'
 #'@export
 pairs_generate <- function(media, av_inclusions, inclusion_tolerance,
-	separation_constraint = NULL, chain_length) {
+	separation_constraint = NULL, chain_length = 1) {
 
 	stringsAsFactorsOption <- getOption("stringsAsFactors")
   options(stringsAsFactors = FALSE)
