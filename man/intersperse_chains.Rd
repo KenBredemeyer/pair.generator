@@ -28,5 +28,5 @@ of consecutive pairs which is less than \code{chain_length}.
 }
 \seealso{
 \code{\link{pairs_generate}}, \code{\link{chain}},
-  \code{\link{allocate}}
+  \code{\link{pairs_allocate}}
 }

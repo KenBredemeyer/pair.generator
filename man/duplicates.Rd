@@ -17,7 +17,8 @@ repeated pairs.}
 \value{
 A data frame showing which pairs are repeated, if any, or \code{NULL}
   if there are no repeated pairs.  A message is also optionally returned if
-  there are no repeated pairs.
+  there are no repeated pairs.  The column \code{pairs_i} contains the row
+  numbers from \code{pairs} which have duplicated pairs.
 }
 \description{
 Use this function on objects returned from \code{pairs_generate}, or similar

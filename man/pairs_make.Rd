@@ -2,15 +2,15 @@
 % Please edit documentation in R/pairs_make.R
 \name{pairs_make}
 \alias{pairs_make}
-\title{Generate Pairs}
+\title{Generate pairs}
 \usage{
 pairs_make(x, type = "standard_pairs", chaining_constant = 4,
   separation_constraint = FALSE, nc_include = NA, min_c = 10,
   max_c = 20)
 }
 \arguments{
-\item{x}{A data.frame containing 3 variables named "media", "core", "score".
-Variable types must be "character", "numeric", "numeric".}
+\item{x}{Data frame containing 3 variables named \code{media, core, score}.
+Variable types must be character, numeric, numeric.}
 
 \item{type}{A character string, either \code{"core_noncore"} or
 \code{"standard_pairs"}. Use \code{"standard_pairs"} to construct a new
@@ -34,16 +34,17 @@ and \code{max_c} are relevant for \code{type = "standard_pairs"} only.}
 included.}
 }
 \value{
-A data frame with paired performances, where "left" and "right" form
-  the pair. "combination" is the row number corresponding to a data frame
-  containing all possiblge pairs, used for checks. For importing into an
-  interface for judging, use only "left", "right" and "chain_number".
+A data frame with paired performances, where \code{left} and
+  \code{right} form the pair. \code{combination} is the row number
+  corresponding to a data frame containing all possiblge pairs, used for
+  checks. For importing into an interface for judging, use only \code{left},
+  \code{right} and \code{chain_number}.
 }
 \description{
 Pair performances or media items for constructing a pairwise comparison
-design.  \strong{Soft deprecated} - use \code{pairs_generate} instead for standard
-pairs, or \code{pairs_generate_cnc} for core versus non-core pair generation,
-unless complete chains only are needed.
+design.  \strong{Soft deprecated} - use \code{pairs_generate} instead for
+standard pairs, or \code{pairs_generate_cnc} for core versus non-core pair
+generation, unless complete chains only are needed.
 }
 \seealso{
 \code{\link{pairs_generate}}, \code{\link{pairs_generate_cnc}}

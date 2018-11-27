@@ -5,7 +5,7 @@
 \title{Form pairs of performances for pairwise comparisons}
 \usage{
 pairs_generate(media, av_inclusions, inclusion_tolerance,
-  separation_constraint = NULL, chain_length)
+  separation_constraint = NULL, chain_length = 1)
 }
 \arguments{
 \item{media}{Character vector of media or performance labels, or a data.frame
