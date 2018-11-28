@@ -17,10 +17,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Generating Pairs for Pairwise Comparisons
 
-This short introduction provides usage for the `pair.generator` package, for generating a set of pairs for judges to compare.  [user supplies performance names]
+This short introduction provides usage for the `pair.generator` package, for generating a set of pairs for judges to compare.  
 
-See ... for an introduction to pairwise comparisons.
-
+For more on the motivation for the package, as well as theory and background to the method, the following article offers a good introduction to pairwise comparisons for education:
+ Alastair Pollitt (2012). The method of Adaptive Comparative Judgement, Assessment in Education: 
+ Principles, Policy & Practice, 19:3, 281-300
 
 
 ```{r generate pairs}
