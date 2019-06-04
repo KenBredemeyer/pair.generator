@@ -7,7 +7,8 @@
 #'
 #' @param media A data frame containing the variables: \code{media}, a character
 #'   vector of performance labels; \code{core}, a numeric vector, whether core
-#'   (\code{0}) or non-core (\code{1}).
+#'   (\code{1}) or non-core (\code{0}); and \code{score}, a numeric vector of
+#'   scores.
 #'
 #' @param nc_include Integer.  The number of core performances to pair with each
 #'   non-core performance.
