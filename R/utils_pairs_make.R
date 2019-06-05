@@ -30,3 +30,35 @@ switch_lr <- function(pairs) {
   pairs <- temp_copy
   pairs
 }
+
+
+
+#' add combination number to a set of pairs
+#'
+#' for using pairs_generate_cnc with duplicates and pairs_plot
+combination <- function(pairs, media) {
+ 	if ("media" %in% names(media)) {
+ 		media_names <- media["media"]
+ 	} else if (is.vector(media)) {
+  	media_names <- media
+  } else {
+  	stop("media arg must be a vector of names, or contain the 'media' variable as a vector of names")
+  }
+	pairs_lr <- pairs[ , c("left", "right")]
+  combinations <- data.frame(t(utils::combn(media_names, 2)))   # allow for separation constraint
+  colnames(combinations) <- c("left", "right")
+  # forwards match
+  match1 <- plyr::match_df(combinations, pairs_lr)
+  # backwards match
+  colnames(pairs_lr) <- colnames(pairs_lr)[2:1]
+  match2 <- plyr::match_df(combinations, pairs_lr)
+  matches <- rbind(match1, match2)
+  c_index <- as.numeric(rownames(matches))
+  # put c_index in the right order   *!
+  rev_i_i <- as.numeric(rownames(plyr::match_df(pairs_lr, combinations)))
+  colnames(pairs_lr) <- colnames(pairs_lr)[2:1]
+  i_i <- as.numeric(rownames(plyr::match_df(pairs_lr, combinations)))
+
+  cbind(pairs, c_index)
+}
+
