@@ -13,13 +13,13 @@
 #'   \code{mead, sd} for \code{rnorm}.
 #' @export
 sim_judge <- function(performances, pairs, distribution = "uniform", min, max, mean, sd) {
-  stopifnot(any(distribution == c("uniform", "random")))
+  stopifnot(any(distribution == c("uniform", "normal")))
 	x <- data.frame(media = performances)
   nrows_x <- dim(x)[1]
 
 	if (distribution == "uniform") {
 	  x$beta <- stats::runif(nrows_x, min, max)
-	} else if(distribution == "random") {
+	} else if(distribution == "normal") {
 		x$beta <- stats::rnorm(nrows_x, mean, sd)
 	}
 
