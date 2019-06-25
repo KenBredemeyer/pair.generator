@@ -24,17 +24,24 @@ sim_judge <- function(performances, pairs, distribution = "uniform", min, max, m
 	}
 
 	judgements <- dplyr::left_join(pairs, x, by = c("left" = "media"))
-	colnames(judgements)[6] <- "left_beta"
+	colnames(judgements)[dim(judgements)[2]] <- "left_beta"
 	judgements <- dplyr::left_join(judgements, x, by = c("right" = "media"))
-	colnames(judgements)[7] <- "right_beta"
+	colnames(judgements)[dim(judgements)[2]] <- "right_beta"
 
 	P <- function(b1, b2) {
 		exp(b1 - b2) / (1 + exp(b1 - b2))
 	}
 
-	judgements[,8] <- stats::rbinom(dim(judgements)[1], 1, P(judgements[,6], judgements[,7]))
-	colnames(judgements)[8] <- "left_wins"
+	left_wins <- stats::rbinom(dim(judgements)[1], 1,
+	                           P(judgements[,"left_beta"], judgements[,"right_beta"]))
+	Selected <- vector("character", length = length(left_wins))
+	for (i in 1:length(left_wins)) {
+		if (left_wins[i]) {
+			Selected[i] <- judgements$left[i]
+		} else if (!left_wins[i]) {
+			Selected[i] <- judgements$left[i]
+		}
+	}
 
-	judgements
+	cbind(judgements[ , ], Selected)
 }
-
