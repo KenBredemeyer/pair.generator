@@ -43,5 +43,6 @@ sim_judge <- function(performances, pairs, distribution = "uniform", min, max, m
 		}
 	}
 
-	cbind(judgements[ , ], Selected)
+	sim_judgements <- cbind(judgements, Selected)
+	list(sim_judgements, sim_betas = x)
 }
