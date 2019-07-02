@@ -39,7 +39,7 @@ sim_judge <- function(performances, pairs, distribution = "uniform", min, max, m
 		if (left_wins[i]) {
 			Selected[i] <- judgements$left[i]
 		} else if (!left_wins[i]) {
-			Selected[i] <- judgements$left[i]
+			Selected[i] <- judgements$right[i]
 		}
 	}
 
