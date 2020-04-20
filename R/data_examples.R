@@ -40,16 +40,3 @@
 #'   }
 "data_cnc"
 
-
-#' Example student performance lables
-#'
-#' A mock example resembling labels of student performances used in the equating
-#' of NAPLAN Writing, a large scale assessment for Australian primary and
-#' secondary school students.
-#'
-#' @docType data
-#'
-#' @usage data(NAPLAN_example)
-#'
-#' @format Character vector.
-"NAPLAN_example"
