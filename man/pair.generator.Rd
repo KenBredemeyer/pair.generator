@@ -3,7 +3,6 @@
 \docType{package}
 \name{pair.generator}
 \alias{pair.generator}
-\alias{pair.generator-package}
 \title{pair.generator: Generate pairs for pairwise comparisons projects}
 \description{
 The pair.generator package is designed to generate pairs for comparisons of

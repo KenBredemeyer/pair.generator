@@ -4,9 +4,15 @@
 \alias{pairs_make}
 \title{Generate pairs}
 \usage{
-pairs_make(x, type = "standard_pairs", chaining_constant = 4,
-  separation_constraint = FALSE, nc_include = NA, min_c = 10,
-  max_c = 20)
+pairs_make(
+  x,
+  type = "standard_pairs",
+  chaining_constant = 4,
+  separation_constraint = FALSE,
+  nc_include = NA,
+  min_c = 10,
+  max_c = 20
+)
 }
 \arguments{
 \item{x}{Data frame containing 3 variables named \code{media, core, score}.

@@ -4,7 +4,8 @@
 \name{data_standard}
 \alias{data_standard}
 \title{Example data set}
-\format{A data frame with 3 variables. Column headers are \code{media},
+\format{
+A data frame with 3 variables. Column headers are \code{media},
   \code{core} & \code{score}.
 \describe{
   \item{media}{The label of the performance
@@ -13,7 +14,8 @@
   Core is for making a new scale, non-core is for locating a performance on
   an existing scale.}
   \item{score}{Examples of student scores out of 100.}
-}}
+}
+}
 \usage{
 data(data_standard)
 }

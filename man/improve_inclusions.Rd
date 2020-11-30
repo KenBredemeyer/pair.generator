@@ -5,8 +5,15 @@
 \title{Modify a data frame of pairs to improve the range of inclusions of
 performances}
 \usage{
-improve_inclusions(gp, combinations, av_inclusions, inclusion_tolerance,
-  animate = FALSE, max_iterations = 600, allow_repeats = FALSE)
+improve_inclusions(
+  gp,
+  combinations,
+  av_inclusions,
+  inclusion_tolerance,
+  animate = FALSE,
+  max_iterations = 600,
+  allow_repeats = FALSE
+)
 }
 \arguments{
 \item{gp}{Data frame of pairs, such as that returned from
