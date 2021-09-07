@@ -41,3 +41,26 @@ intersperse_chains <- function(pairs, chain_length) {
   #newpairs <- merge(rles_copy, pairs, by = "chain_number", sort = FALSE)  # order not quite right
   newpairs
 }
+
+
+
+#' Randomise Chains
+#'
+#' Randomise the row order in a set of pairs, but keep the chaining. Useful for
+#' combining standard pairs with core v non-core pairs.
+#'
+#' @param x Data frame of pairs, including the variable \code{chain_number}.
+#'
+#' @export
+mix_chains <- function(x) {
+  stopifnot(length(x$chain_number) >= 1)
+  # make a copy of input object
+  x_rand <- x
+  new_chain_num <- sample(sort(unique(x$chain_number)))
+  chain_index <- list()
+  for (i in sort(unique(x$chain_number))) {
+    chain_index[[i]] <- which(x$chain_number == i)
+    x_rand[chain_index[[i]], "chain_number"] <- new_chain_num[i]
+  }
+  x_rand[order(x_rand$chain_number), ]
+}
