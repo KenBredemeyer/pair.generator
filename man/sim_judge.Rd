@@ -4,8 +4,7 @@
 \alias{sim_judge}
 \title{Simulate judgements of pairwise comparisons}
 \usage{
-sim_judge(performances, pairs, distribution = "uniform", min, max, mean,
-  sd)
+sim_judge(performances, pairs, distribution = "uniform", min, max, mean, sd)
 }
 \arguments{
 \item{performances}{Character vector of media or performance labels.}
