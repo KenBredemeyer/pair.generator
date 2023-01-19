@@ -52,13 +52,12 @@ duplicates <- function(pairs, message = TRUE) {
 #'
 #' @param x data frame of pairs, containing \code{left} and \code{right}
 #'
-#' @export
 find_duplicate_pairs <- function(x) {
 	# stopifnot a df with Item, Item.1, Selected
 	#x <- x[-which(duplicated(x)), ]
 	find_i <- list()
 	for (i in 1:dim(x)[1]) {
-		find_i[[i]] <- which(x$left[-i] == x$right[i] & x$right[-i] == x$left[i])
+		find_i[[i]] <- which(x$left[-i] == x$right[i] & x$right[-i] == x$left[i])  #! wrong. find right index from x[-i]
 	}
 	repeat_judgments2_i <- do.call(c, find_i)
 	(rbind(x[repeat_judgments2_i, ], x[which(duplicated(x)), ]))
