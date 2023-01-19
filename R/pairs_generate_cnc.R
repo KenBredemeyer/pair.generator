@@ -27,6 +27,10 @@
 #' @examples
 #' pairs_generate_cnc(data_cnc[1:4, ], nc_include = 1, chain_length = 1)
 #'
+#' @references Humphry, S., & Bredemeyer, K. (2022). Pairwise comparison scale
+#'   extension using core linking sets. Frontiers in Education, 7, [826742].
+#'   \url{https://doi.org/10.3389/feduc.2022.826742}
+
 #' @export
 pairs_generate_cnc <- function(media, nc_include, chain_length = 4, separation_constraint = FALSE) {
 
