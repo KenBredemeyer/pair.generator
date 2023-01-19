@@ -54,9 +54,30 @@ intersperse_chains <- function(pairs, chain_length) {
 #' @export
 mix_chains <- function(x) {
   stopifnot(length(x$chain_number) >= 1)
+  # re-label chain numbers so that no chain numbers are missing
+  chain_reps <- rle(x$chain_number[order(x$chain_number)])[[1]]
+  x$chain_number[order(x$chain_number)] <- rep(1:length(unique(x$chain_number)), times = chain_reps)
   # make a copy of input object
   x_rand <- x
   new_chain_num <- sample(sort(unique(x$chain_number)))
+  chain_index <- list()
+  for (i in sort(unique(x$chain_number))) {
+    chain_index[[i]] <- which(x$chain_number == i)
+    x_rand[chain_index[[i]], "chain_number"] <- new_chain_num[i]
+  }
+  x_rand[order(x_rand$chain_number), ]
+}
+
+
+
+mix_chains2 <- function(x) {
+  stopifnot(length(x$chain_number) >= 1)
+  # re-label chain numbers so that no chain numbers are missing
+  chain_reps <- rle(x$chain_number[order(x$chain_number)])[[1]]
+  x$chain_number[order(x$chain_number)] <- rep(1:length(unique(x$chain_number)), times = chain_reps)
+  # make a copy of input object
+  x_rand <- x
+  new_chain_num <- sample(1:length(unique(x$chain_number)))
   chain_index <- list()
   for (i in sort(unique(x$chain_number))) {
     chain_index[[i]] <- which(x$chain_number == i)
