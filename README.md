@@ -7,9 +7,11 @@ in which performances are located on an ability continuum.  pair.generator conve
 the design stage.
 
 ## Installation
-Install from GitHub by cloning the package, or install using devtools.
+Install from GitHub by cloning the package, or install using remotes.
 ```
-devtools:install_github("KenBredemeyer/pair.generator")
+# load remotes packages to install
+library(remotes)
+remotes:install_github("KenBredemeyer/pair.generator")
 ```
 
 ## Usage
@@ -18,6 +20,8 @@ presenting performances to judges on the left and right sides.  The package has 
 for experimenting with the functions.
 
 ```
+# load package
+library(pair.generator)
 # set rng seed for reproducability
 set.seed(1)
 
@@ -27,4 +31,10 @@ pairs <- pairs_generate(data_standard, av_inclusions = 10, inclusion_tolerance =
 # plot the number of times each performance is included in the set of pairs
 pairs_plot_inclusions(pairs)
 ```
-
+As with any R package, get a full list of exported fuctions with lsf.str(), and access help with ?.
+```
+# see all exported functions in pair.generator
+lsf.str("package:pair.generator")
+# access help on chain(), for chaining pairs.
+?chain
+```
